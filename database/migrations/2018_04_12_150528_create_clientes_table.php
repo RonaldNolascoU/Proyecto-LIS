@@ -21,7 +21,6 @@ class CreateClientesTable extends Migration
             $table->string('PrimerApellido', 15);
             $table->string('SegundoApellido', 15)->nullable();
             $table->string('DUI',10);
-            $table->string('NIT',15);
             $table->string('telefono',9);
             $table->string('correo',50)->unique();
             $table->text('imagen');

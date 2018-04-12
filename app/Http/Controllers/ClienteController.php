@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Input;
 
 class ClienteController extends Controller
 {
@@ -35,7 +36,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['PrimerNombre'=>'required','SegundoNombre','PrimerApellido'=>'required','SegundoApellido','DUI'=>'required','NIT'=>'required','Correo'=>'required','Telefono'=>'required','clave'=>'required']);
+        $this->validate($request,['PrimerNombre'=>'required','SegundoNombre','PrimerApellido'=>'required','SegundoApellido','DUI'=>'required','Imagen'=>'required','Correo'=>'required','Telefono'=>'required','clave'=>'required']);
         $encription = new Encryption();
         $encription->fill(['PrimerNombre'=>($request->PrimerNombre),'SegundoNombre'=>($request->PrimerNombre),'PrimerApellido'=>($request->PrimerNombre),'SegundoApellido'=>($request->PrimerNombre),'DUI'=>($request->PrimerNombre),'NIT'=>($request->PrimerNombre),'Correo'=>($request->PrimerNombre),'Telefono'=>($request->PrimerNombre),'clave'=>Crypt::encrypt($request->PrimerNombre)])-save();
 
