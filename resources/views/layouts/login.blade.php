@@ -19,7 +19,7 @@
                     <a href="/"><i class="material-icons left">home</i>Inicio</a>
                 </li>
                 <li>
-                    <a href="Cliente.create"><i class="material-icons left">assignment</i>Registrate</a>
+                    <a href="{{route('Cliente.create')}}"><i class="material-icons left">assignment</i>Registrate</a>
                 </li>
             </ul>
         </div>

@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('Cliente','ClienteController');
+Route::resource('Cliente','ClienteController');

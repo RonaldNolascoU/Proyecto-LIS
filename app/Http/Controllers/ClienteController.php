@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cliente;
 use Illuminate\Support\Facades\Crypt;
-use Input;
+use Intervention\Image\Facades\Image;
 
 class ClienteController extends Controller
 {
@@ -36,9 +37,14 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['PrimerNombre'=>'required','SegundoNombre','PrimerApellido'=>'required','SegundoApellido','DUI'=>'required','Imagen'=>'required','Correo'=>'required','Telefono'=>'required','clave'=>'required']);
-        $encription = new Encryption();
-        $encription->fill(['PrimerNombre'=>($request->PrimerNombre),'SegundoNombre'=>($request->PrimerNombre),'PrimerApellido'=>($request->PrimerNombre),'SegundoApellido'=>($request->PrimerNombre),'DUI'=>($request->PrimerNombre),'NIT'=>($request->PrimerNombre),'Correo'=>($request->PrimerNombre),'Telefono'=>($request->PrimerNombre),'clave'=>Crypt::encrypt($request->PrimerNombre)])-save();
+        if($request->hasFile('Imagen')){
+            $file = $request->file('Imagen');
+            $extension = $file->getClientOriginalExtension();
+            $file_name = $request->PrimerNombre.$request->PrimerApellido.'.'.$extension;
+            Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
+        }else{
+            dd('no');
+        }
 
     }
 

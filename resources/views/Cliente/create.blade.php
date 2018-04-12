@@ -11,7 +11,8 @@
     <div class="col s4"></div>
     <div class="col s4" id="reg">
         <div class="row">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route('Cliente.store')}}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
                 <div class="col s12" id="login">
                     <div class="col s12 teal lighten-2 white-text" id="enc">
                         <h4 class="center-align">
