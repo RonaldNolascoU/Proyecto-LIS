@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('registrar', function(){
     return view('singup');
 });
+
+Route::resource('Cliente','ClienteController');
