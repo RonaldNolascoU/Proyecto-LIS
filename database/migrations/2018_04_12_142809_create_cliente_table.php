@@ -23,10 +23,9 @@ class CreateClienteTable extends Migration
             $table->string('DUI');
             $table->string('NIT');
             $table->string('telefono');
-            $table->string('correo');
+            $table->string('correo')->unique();
             $table->text('clave');
             $table->timestamps();
-            $table->unique('correo');
         });
     }
 
