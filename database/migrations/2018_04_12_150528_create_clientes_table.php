@@ -24,6 +24,7 @@ class CreateClientesTable extends Migration
             $table->string('NIT',15);
             $table->string('telefono',9);
             $table->string('correo',50)->unique();
+            $table->text('imagen');
             $table->text('clave');
             $table->timestamps();
         });

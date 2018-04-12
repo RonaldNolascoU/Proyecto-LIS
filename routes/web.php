@@ -15,8 +15,4 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('registrar', function(){
-    return view('singup');
-});
-
-Route::resource('Cliente','ClienteController');
+Route::get('Cliente/create','ClienteController@create');
