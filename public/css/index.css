@@ -1,0 +1,17 @@
+body{
+    background-image: url("../img/e328c2a68d3da0ace53cb15caaa42241.png")
+}
+
+#login{
+    margin: 5%;
+    background-color: rgba(255, 255, 255, 0.925);
+    padding: 2%;
+}
+#top{
+    margin-top: -3%;
+    width: 98.3%;
+    margin-left: 1%;
+}
+#up{
+    margin-top: 8%;
+}
