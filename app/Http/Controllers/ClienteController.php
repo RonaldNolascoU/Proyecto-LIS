@@ -56,7 +56,7 @@ class ClienteController extends Controller
             if($request->hasFile('Imagen')){
                 $file = $request->file('Imagen');
                 $extension = $file->getClientOriginalExtension();
-                $file_name = $request->PrimerNombre.$request->PrimerApellido.$file->getClientOriginalName().'.'.$extension;
+                $file_name = $request->PrimerNombre.$request->PrimerApellido.$file->getClientOriginalName();
                 Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
                 $pass = Crypt::encrypt($request->Clave);
                 Cliente::create([
