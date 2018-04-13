@@ -37,13 +37,30 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile('Imagen')){
-            $file = $request->file('Imagen');
-            $extension = $file->getClientOriginalExtension();
-            $file_name = $request->PrimerNombre.$request->PrimerApellido.'.'.$extension;
-            Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
-        }else{
-            dd('no');
+        try{
+            if($request->hasFile('Imagen')){
+                $file = $request->file('Imagen');
+                $extension = $file->getClientOriginalExtension();
+                $file_name = $request->PrimerNombre.$request->PrimerApellido.'.'.$extension;
+                Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
+                $pass = Crypt::encrypt($request->Clave);
+                Cliente::create([
+                    'PrimerNombre' => $request->PrimerNombre,
+                    'SegundoNombre' => $request->SegundoNombre,
+                    'PrimerApellido' => $request->PrimerApellido,
+                    'SegundoApellido' => $request->SegundoApellido,
+                    'DUI' => $request->DUI,
+                    'Correo' => $request->Correo,
+                    'Telefono' => $request->Telefono,
+                    'clave' => ''.$pass.'',
+                    'Imagen' => $file_name,
+                ]);
+                return view('index')->with('success','Registro ingresado correctamente');
+            }else{
+                dd('No imagen');
+            }
+        }catch(Exception $ex){
+            dd($ex);
         }
 
     }
