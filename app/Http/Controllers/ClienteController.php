@@ -76,11 +76,12 @@ class ClienteController extends Controller
                 $success = "Registro ingresado correctamente";
                 return view('index', compact('success'));
             }else{
-                dd('No imagen');
+                $prb = "La imagen es obligatoria";
+                return view('Cliente.create', compact('prb'));
             }
         }catch(QueryException $ex){
-            $errors = "Correo electronico ya implementado en otra cuenta";
-            return view('Cliente.create', compact('errors'));
+            $prb = "Correo electronico ya implementado en otra cuenta";
+            return view('Cliente.create', compact('prb'));
         }
 
     }
@@ -135,18 +136,24 @@ class ClienteController extends Controller
             $cliente = Cliente::where(['correo'=>$request->mail])->get();
             foreach ($cliente as $cl) {
                 $pass = Crypt::decrypt($cl->clave);
+                $id = $cl->id;
             }
-            if($pass == $request->clave){
-                return view('Mascota.index');
+            if(!empty($pass)){
+                if($pass == $request->clave){
+                    Session::put('correo',$request->correo);
+                    Session::put('id',$id);
+                    return view('Mascota.index');
+                }else{
+                    $prb = "Correo o clave incorrecta";
+                    return view('index', compact('prb'));
+                }
             }else{
-                $errors = "Correo o clave incorrecta";
-                return view('index', compact('errors'));
+                $prb = "No se encontro ninguna cuenta con ese correo";
+                return view('index', compact('prb'));
             }
         }catch(QueryException $ex){
-            $errors = "Correo o clave incorrecta";
-            return view('index', compact('errors'));
+            $prb = "Correo o clave incorrecta";
+            return view('index', compact('prb'));
         }
-
-
     }
 }

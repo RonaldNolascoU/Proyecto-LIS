@@ -8,14 +8,14 @@
 
 @section('content')
 
-@if(isset($errors))
+@if(isset($prb))
     <style>
         .toast{
             background-color: #d32f2f;
         }   
     </style>
     <script type="text/javascript">
-        M.toast({html: '{{$errors}}'})
+        M.toast({html: '{{$prb}}'})
     </script>
 @endif
 
