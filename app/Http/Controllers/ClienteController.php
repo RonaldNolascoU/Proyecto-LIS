@@ -41,25 +41,22 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         try{
-            $v = Validator::make($request->all(), [
+            /*$v = Validator::make($request->all(), [
                 'PrimerNombre' => 'required',
-                'SegundoNombre' => '',
                 'PrimerApellido' => 'required',
-                'SegundoApellido' => '',
                 'DUI' => 'required',
-                'Correo' => 'required|email|unique:Cliente',
+                'Correo' => 'required',
                 'Telefono' => 'required',
                 'clave' => 'required',
-                'Imagen' => 'required|Imagen',
             ]);
 
             if($v->fails()){
-                return redirect()->back()->withInput()->withErrors($v->errors());
-            }
+                return redirect()->back()->with('prb','No pasa');//Input()->withErrors($v->errors());
+            }*/
             if($request->hasFile('Imagen')){
                 $file = $request->file('Imagen');
                 $extension = $file->getClientOriginalExtension();
-                $file_name = $request->PrimerNombre.$request->PrimerApellido.'.'.$extension;
+                $file_name = $request->PrimerNombre.$request->PrimerApellido.$file->getClientOriginalName().'.'.$extension;
                 Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
                 $pass = Crypt::encrypt($request->Clave);
                 Cliente::create([
@@ -74,14 +71,14 @@ class ClienteController extends Controller
                     'Imagen' => $file_name,
                 ]);
                 $success = "Registro ingresado correctamente";
-                return view('index', compact('success'));
+                return redirect('/')->with('success',$success);
             }else{
                 $prb = "La imagen es obligatoria";
-                return view('Cliente.create', compact('prb'));
+                return redirect()->route('Cliente.create')->with('prb',$prb);
             }
         }catch(QueryException $ex){
             $prb = "Correo electronico ya implementado en otra cuenta";
-            return view('Cliente.create', compact('prb'));
+            return redirect()->route('Cliente.create')->with('prb',$prb);
         }
 
     }
@@ -145,15 +142,15 @@ class ClienteController extends Controller
                     return view('Mascota.index');
                 }else{
                     $prb = "Correo o clave incorrecta";
-                    return view('index', compact('prb'));
+                    return redirect('/')->with('prb',$prb);
                 }
             }else{
                 $prb = "No se encontro ninguna cuenta con ese correo";
-                return view('index', compact('prb'));
+                return redirect('/')->with('prb',$prb);
             }
         }catch(QueryException $ex){
             $prb = "Correo o clave incorrecta";
-            return view('index', compact('prb'));
+            return redirect('/')->with('prb',$prb);
         }
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.login') 
 
-@section('title','Index') 
+@section('title','Registrar') 
 
 @section('head')
     <link rel="stylesheet" href="../css/index.css"> 

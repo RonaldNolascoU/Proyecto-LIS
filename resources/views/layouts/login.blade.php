@@ -12,24 +12,24 @@
 </head>
 
 <body>
-    @if(isset($success))
+    @if(Session::has('success'))
         <style>
             .toast{
                 background-color: #4db6ac;
             }   
         </style>
         <script type="text/javascript">
-            M.toast({html: '{{$success}}'})
+            M.toast({html: "{{Session::get('success')}}"})
         </script>
     @endif
-    @if(isset($prb))
+    @if(Session::has('prb'))
         <style>
             .toast{
                 background-color: #d32f2f;
             }   
         </style>
         <script type="text/javascript">
-            M.toast({html: '{{$prb}}'})
+            M.toast({html: "{{Session::get('prb')}}"})
         </script>
     @endif
     <nav>
