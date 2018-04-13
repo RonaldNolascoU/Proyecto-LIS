@@ -5,27 +5,6 @@
     <link rel="stylesheet" href="../css/index.css"> 
 @endsection 
 @section('content')
-@if(isset($success))
-    <style>
-        .toast{
-            background-color: #4db6ac;
-        }   
-    </style>
-    <script type="text/javascript">
-        M.toast({html: '{{$success}}'})
-    </script>
-@endif
-@if(isset($prb))
-    <style>
-        .toast{
-            background-color: #d32f2f;
-        }   
-    </style>
-    <script type="text/javascript">
-        M.toast({html: '{{$prb}}'})
-    </script>
-@endif
-
 <div class="row">
     <div class="col s8">
     </div>

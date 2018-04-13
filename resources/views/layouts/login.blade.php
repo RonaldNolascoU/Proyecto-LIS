@@ -12,7 +12,26 @@
 </head>
 
 <body>
-
+    @if(isset($success))
+        <style>
+            .toast{
+                background-color: #4db6ac;
+            }   
+        </style>
+        <script type="text/javascript">
+            M.toast({html: '{{$success}}'})
+        </script>
+    @endif
+    @if(isset($prb))
+        <style>
+            .toast{
+                background-color: #d32f2f;
+            }   
+        </style>
+        <script type="text/javascript">
+            M.toast({html: '{{$prb}}'})
+        </script>
+    @endif
     <nav>
         <div class="nav-wrapper teal lighten-2">
             <a href="#!" class="brand-logo">StarPets</a>
