@@ -34,7 +34,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        M.toast({html: 'I am a toast!'})
+        M.toast({html: '<span id="message">I am a toast!</span>'})
     })
 </script>
 @endsection

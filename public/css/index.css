@@ -20,3 +20,13 @@ body{
     margin-top: -2.2%;
     width: 104.2%;
 }
+
+#toast-container {
+    top: auto !important;
+    right: 7%;
+    bottom: 10%;
+    left: auto !important;  
+  }
+.toast{
+    background-color: #4db6ac;
+}
