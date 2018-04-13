@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use App\Mascota;
 
 class MascotaController extends Controller
 {
@@ -16,7 +18,8 @@ class MascotaController extends Controller
      */
     public function index()
     {
-        //
+        $mascotas = Mascota::where(['cliente_id'=>Session::get('id')])->get();
+        return view('Mascota.index', compact('mascotas'));
     }
 
     /**

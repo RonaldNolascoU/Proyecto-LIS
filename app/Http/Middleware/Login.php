@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Session;
 
 class Login
 {
@@ -15,9 +16,12 @@ class Login
      */
     public function handle($request, Closure $next)
     {
-        if(!(Session::has('id') AND Session::has('correo'))){
-            return redirect('/');
+        if(Session::has('id')){
+            return $next($request);
+        }else{
+            $prb = "Necesita loguearse para acceder";
+            return redirect('/')->with('prb',$prb);
         }
-        return $next($request);
+        
     }
 }

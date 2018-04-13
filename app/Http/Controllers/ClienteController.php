@@ -9,6 +9,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use \Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
 
 class ClienteController extends Controller
 {
@@ -139,7 +140,7 @@ class ClienteController extends Controller
                 if($pass == $request->clave){
                     Session::put('correo',$request->correo);
                     Session::put('id',$id);
-                    return view('Mascota.index');
+                    return redirect()->route('Mascota.index');
                 }else{
                     $prb = "Correo o clave incorrecta";
                     return redirect('/')->with('prb',$prb);

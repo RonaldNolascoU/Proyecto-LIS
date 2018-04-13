@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Route::resource('Cliente','ClienteController');
 
+Route::resource('Mascota','MascotaController');
+
 Route::post('Cliente/login','ClienteController@login');
