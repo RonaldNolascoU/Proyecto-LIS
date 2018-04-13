@@ -26,11 +26,9 @@
                         <input id="clave" name="clave" type="password" class="validate">
                         <label for="clave">Password</label>
                     </div>
-                    <div class="col s4"></div>
-                    <div class="col s4">
+                    <div class="col s4 offset-s4">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Entrar</button>
                     </div>
-                    <div class="col s4"></div>
                 </form>
             </div>
         </div>
