@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Cliente;
 use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
@@ -38,6 +40,21 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         try{
+            $v = Validator::make($request->all(), [
+                'PrimerNombre' => 'required',
+                'SegundoNombre' => '',
+                'PrimerApellido' => 'required',
+                'SegundoApellido' => '',
+                'DUI' => 'required',
+                'Correo' => 'required|email|unique:Cliente',
+                'Telefono' => 'required',
+                'clave' => 'required',
+                'Imagen' => 'required|Imagen',
+            ]);
+
+            if($v->fails()){
+                return redirect()->back()->withInput()->withErrors($v->errors());
+            }
             if($request->hasFile('Imagen')){
                 $file = $request->file('Imagen');
                 $extension = $file->getClientOriginalExtension();
@@ -55,12 +72,14 @@ class ClienteController extends Controller
                     'clave' => ''.$pass.'',
                     'Imagen' => $file_name,
                 ]);
-                return view('index')->with('success','Registro ingresado correctamente');
+                $success = "Registro ingresado correctamente";
+                return view('index', compact('success'));
             }else{
                 dd('No imagen');
             }
-        }catch(Exception $ex){
-            dd($ex);
+        }catch(\Illuminate\Database\QueryException $ex){
+            $errors = "Correo electronico ya implementado en otra cuenta";
+            return view('Cliente.create', compact('errors'));
         }
 
     }

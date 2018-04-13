@@ -1,5 +1,20 @@
-@extends('layouts.login') @section('title','Index') @section('head')
-<link rel="stylesheet" href="css/index.css"> @endsection @section('content')
+@extends('layouts.login') 
+
+@section('title','Index') 
+@section('head')
+    <link rel="stylesheet" href="css/index.css"> 
+@endsection 
+@section('content')
+@if(isset($success))
+    <style>
+        .toast{
+            background-color: #4db6ac;
+        }   
+    </style>
+    <script type="text/javascript">
+        M.toast({html: '{{$success}}'})
+    </script>
+@endif
 <div class="row">
     <div class="col s8">
     </div>
@@ -11,15 +26,15 @@
                         <img src="img/paw-print-.png" alt="StarPets">
                         <br>Iniciar sesion</h4>
                 </div>
-                <form class="col s12" method="POST" action="login">
+                <form class="col s12" method="POST" action="Cliente/login">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">mail_outline</i>
-                        <input id="mail" type="text" class="validate">
+                        <input id="mail" name="mail" type="text" class="validate">
                         <label for="mail">E-Mail</label>
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input id="clave" type="password" class="validate">
+                        <input id="clave" name="clave" type="password" class="validate">
                         <label for="clave">Password</label>
                     </div>
                     <div class="col s4"></div>
@@ -32,9 +47,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        M.toast({html: '<span id="message">I am a toast!</span>'})
-    })
-</script>
 @endsection

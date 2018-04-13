@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::resource('Cliente','ClienteController');
+//Route::resource('Cliente','ClienteController');
+
+Route::post('Cliente/login','ClienteController@login');

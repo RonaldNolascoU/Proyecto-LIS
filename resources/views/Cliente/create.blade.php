@@ -7,6 +7,18 @@
 @endsection 
 
 @section('content')
+
+@if(isset($errors))
+    <style>
+        .toast{
+            background-color: #d32f2f;
+        }   
+    </style>
+    <script type="text/javascript">
+        M.toast({html: '{{$errors}}'})
+    </script>
+@endif
+
 <div class="row">
     <div class="col s4"></div>
     <div class="col s4" id="reg">
