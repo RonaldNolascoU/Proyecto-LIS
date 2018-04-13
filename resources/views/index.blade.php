@@ -6,7 +6,7 @@
 @endsection 
 @section('content')
 <div class="row">
-    <div class="col s4 offset-s8" id="up">
+    <div class="col xl4 offset-xl8 s12" id="up">
         <div id="login" class="card darken-1">
             <div class="row">
                 <div class="col s12 teal lighten-2 white-text" id="top">
