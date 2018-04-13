@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use \Illuminate\Database\QueryException;
 
 class ClienteController extends Controller
 {
@@ -77,7 +78,7 @@ class ClienteController extends Controller
             }else{
                 dd('No imagen');
             }
-        }catch(\Illuminate\Database\QueryException $ex){
+        }catch(QueryException $ex){
             $errors = "Correo electronico ya implementado en otra cuenta";
             return view('Cliente.create', compact('errors'));
         }
@@ -127,5 +128,25 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function login(Request $request){
+        try{
+            $cliente = Cliente::where(['correo'=>$request->mail])->get();
+            foreach ($cliente as $cl) {
+                $pass = Crypt::decrypt($cl->clave);
+            }
+            if($pass == $request->clave){
+                return view('Mascota.index');
+            }else{
+                $errors = "Correo o clave incorrecta";
+                return view('index', compact('errors'));
+            }
+        }catch(QueryException $ex){
+            $errors = "Correo o clave incorrecta";
+            return view('index', compact('errors'));
+        }
+
+
     }
 }

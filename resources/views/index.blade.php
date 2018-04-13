@@ -26,8 +26,9 @@
                         <img src="img/paw-print-.png" alt="StarPets">
                         <br>Iniciar sesion</h4>
                 </div>
-                <form class="col s12" method="POST" action="Cliente/login">
-                    <div class="input-field col s12">
+                <form class="col s12" method="post" action="Cliente/login">
+                {{ csrf_field() }}
+                 <div class="input-field col s12">
                         <i class="material-icons prefix">mail_outline</i>
                         <input id="mail" name="mail" type="text" class="validate">
                         <label for="mail">E-Mail</label>
