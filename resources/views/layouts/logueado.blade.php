@@ -66,24 +66,26 @@
             </li>
             <li>
                 <a href="perfil">
-                    <i class="material-icons">filter_list</i>Perfil</a>
+                    <i class="material-icons">filter_list</i>Perfil
+                </a>
             </li>
             <li>
                 <div class="divider"></div>
             </li>
-            <li>
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header">
-                            <i class="material-icons">pets</i>Mascotas</div>
+            <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                    <li> 
+                        <div class="collapsible-header" id="mv">
+                            <i class="material-icons">pets</i>Mascotas
+                        </div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a href="#">
+                                    <a href="#" id="mvd">
                                         <i class="material-icons">add</i>Ingresar mascota</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('Mascota.index')}}">
+                                    <a href="{{route('Mascota.index')}}" id="mvd">
                                         <i class="material-icons">apps</i>Lista de mascota</a>
                                 </li>
                             </ul>

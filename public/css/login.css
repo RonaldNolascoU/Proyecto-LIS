@@ -18,3 +18,11 @@ body{
 main{
     margin-top: -1.5%;
 }
+
+#mv{
+    padding-left: 32px;
+}
+
+#mvd{
+    padding-left: 48px;
+}

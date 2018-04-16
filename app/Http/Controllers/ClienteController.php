@@ -158,6 +158,6 @@ class ClienteController extends Controller
     public function logout(){
         Session::flush();
         $success = "Vuelva pronto";
-        return redirect('/')->with('success',$success);
+        return redirect('/');
     }
 }
