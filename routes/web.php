@@ -22,3 +22,5 @@ Route::resource('Mascota','MascotaController');
 Route::post('Cliente/login','ClienteController@login');
 
 Route::get('perfil','MascotaController@perfil');
+
+Route::get('cerrar','ClienteController@logout');

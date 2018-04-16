@@ -154,4 +154,10 @@ class ClienteController extends Controller
             return redirect('/')->with('prb',$prb);
         }
     }
+
+    public function logout(){
+        Session::flush();
+        $success = "Vuelva pronto";
+        return redirect('/')->with('success',$success);
+    }
 }
