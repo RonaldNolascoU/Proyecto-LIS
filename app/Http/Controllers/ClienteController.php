@@ -140,7 +140,7 @@ class ClienteController extends Controller
                 if($pass == $request->clave){
                     Session::put('correo',$request->correo);
                     Session::put('id',$id);
-                    return redirect()->route('Mascota.index');
+                    return redirect('perfil');
                 }else{
                     $prb = "Correo o clave incorrecta";
                     return redirect('/')->with('prb',$prb);

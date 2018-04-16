@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Mascota;
+use App\Cliente;
 
 class MascotaController extends Controller
 {
@@ -18,8 +19,9 @@ class MascotaController extends Controller
      */
     public function index()
     {
+        $cliente = Cliente::find(Session::get('id'));
         $mascotas = Mascota::where(['cliente_id'=>Session::get('id')])->get();
-        return view('Mascota.index', compact('mascotas'));
+        return view('Mascota.index', compact('mascotas','cliente'));
     }
 
     /**
@@ -86,5 +88,11 @@ class MascotaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function perfil()
+    {
+        $cliente = Cliente::find(Session::get('id'));
+        return view('Mascota.perfil', compact('cliente'));
     }
 }

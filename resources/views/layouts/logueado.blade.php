@@ -39,20 +39,20 @@
                     <div class="background" id="bc">
                     </div>
                     <center>
-                        <a href="#user">
-                            <img class="circle" src="img/29750566_1797038173688907_295705052_n.png">
+                        <a href="perfil">
+                            <img class="circle" src="img/Clientes/@yield('imagen')">
                         </a>
                     </center>
-                    <a href="#name">
-                        <span class="white-text name">John Doe</span>
+                    <a href="perfil">
+                        <span class="white-text name">@yield('nombre')</span>
                     </a>
-                    <a href="#email">
-                        <span class="white-text email">jdandturk@gmail.com</span>
+                    <a href="perfil">
+                        <span class="white-text email">@yield('email')</span>
                     </a>
                 </div>
             </li>
             <li>
-                <a href="#!">
+                <a href="perfil">
                     <i class="material-icons">filter_list</i>Perfil</a>
             </li>
             <li>
@@ -70,7 +70,7 @@
                                         <i class="material-icons">add</i>Ingresar mascota</a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{route('Mascota.index')}}">
                                         <i class="material-icons">apps</i>Lista de mascota</a>
                                 </li>
                             </ul>
@@ -84,7 +84,9 @@
         </ul>
     </header>
     <main>
-        @yield('content')
+        <div>
+            @yield('content')
+        </div>
     </main>
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large teal lighten-2">
@@ -97,12 +99,12 @@
                 </a>
             </li>
             <li>
-                <a class="btn-floating yellow darken-1" title="Lista de mascotas">
+                <a class="btn-floating yellow darken-1" href="{{route('Mascota.index')}}" title="Lista de mascotas">
                     <i class="material-icons">pets</i>
                 </a>
             </li>
             <li>
-                <a class="btn-floating blue" title="Perfil">
+                <a class="btn-floating blue" href="perfil" title="Perfil">
                     <i class="material-icons">filter_list</i>
                 </a>
             </li>
