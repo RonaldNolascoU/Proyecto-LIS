@@ -8,7 +8,14 @@
 @section('nombre', $cliente->PrimerNombre)
 @section('email', $cliente->correo)
 @section('imagen', $cliente->imagen)
+@section('nav','Perfil') 
 
 @section('content')
-    <h1>Hola</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col xl10 offset-xl2">
+                <h2>Hola</h2>
+            </div>
+        </div>
+    </div>
 @endsection

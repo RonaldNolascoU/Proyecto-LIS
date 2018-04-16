@@ -11,3 +11,10 @@ body{
     background-image: url("../img/f5.png");
     background-size: cover;
 }
+#nav{
+    background-color: #4db6ac;
+}
+
+main{
+    margin-top: -1.5%;
+}

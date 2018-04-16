@@ -33,6 +33,19 @@
         </script>
     @endif
     <header>
+        <div class="top-nav" id="nav">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="row">
+                        <div class="col xl10 offset-xl2 s12">
+                            <h1 class="header white-text center-align">
+                                <i class="material-icons medium">filter_list</i> @yield('nav')
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <ul class="sidenav sidenav-fixed">
             <li>
                 <div class="user-view">
@@ -81,9 +94,17 @@
             <li>
                 <div class="divider"></div>
             </li>
+            <li>
+                <a href="cerrar">
+                    <i class="material-icons">highlight_off</i>Cerrar Sesion
+                </a>
+            </li>
+            <li>
+                <div class="divider"></div>
+            </li>
         </ul>
     </header>
-    <main>
+    <main class="grey lighten-5">
         <div>
             @yield('content')
         </div>
@@ -93,6 +114,11 @@
             <i class="large material-icons">person</i>
         </a>
         <ul>
+            <li>
+                <a class="btn-floating red" href="cerrar" title="Cerrar Sesion">
+                    <i class="material-icons">highlight_off</i>
+                </a>
+            </li>
             <li>
                 <a class="btn-floating green" title="Agregar mascota">
                     <i class="material-icons">add</i>
