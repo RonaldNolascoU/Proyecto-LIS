@@ -26,3 +26,25 @@ main{
 #mvd{
     padding-left: 48px;
 }
+
+.option:hover{
+    color: #039be5 !important;
+    text-decoration: underline;
+}
+
+.principal{
+    color: #1976d2;
+    margin-top: 2.5%;
+}
+
+hr{
+    color: #1976d2;
+    width: 75%;
+}
+#cont{
+    margin-bottom: 0px !important;
+}
+
+#btn-img{
+    margin-left: -8%;
+}

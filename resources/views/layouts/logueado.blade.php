@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col xl10 offset-xl2 s12">
                             <h1 class="header white-text center-align">
-                                <i class="material-icons medium">filter_list</i> @yield('nav')
+                                <i class="material-icons medium">@yield('icon')</i> @yield('nav')
                             </h1>
                         </div>
                     </div>
