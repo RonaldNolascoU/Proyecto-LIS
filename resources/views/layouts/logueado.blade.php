@@ -9,15 +9,13 @@
     <link rel="stylesheet" href="../../css/login.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @yield('head')
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../js/inicializacion.js"></script>
 </head>
 
 <body>
     @if(Session::has('success'))
-        <style>
-            .toast{
-                background-color: #4db6ac;
-            }   
-        </style>
         <script type="text/javascript">
             M.toast({html: "{{Session::get('success')}}"})
         </script>
@@ -138,9 +136,6 @@
             </li>
         </ul>
     </div>
-    <script src="../../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../js/inicializacion.js"></script>
 </body>
 
 </html>

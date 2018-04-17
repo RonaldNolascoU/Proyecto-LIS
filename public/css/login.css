@@ -1,12 +1,7 @@
 body{
     background-image: url("../img/e328c2a68d3da0ace53cb15caaa42241.png")
 }
-#toast-container {
-    top: auto !important;
-    right: 7%;
-    bottom: 10%;
-    left: auto !important;  
-}
+
 #bc{
     background-image: url("../img/f5.png");
     background-size: cover;

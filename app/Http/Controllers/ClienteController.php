@@ -106,7 +106,7 @@ class ClienteController extends Controller
         if(Session::has('id')){
             if(Session::get('id') == $id){
                 $cliente = Cliente::find($id);
-                return View('Mascota.editCliente',compact('cliente'));
+                return View('Cliente.edit',compact('cliente'));
             }
         }else{
             $prb = "Necesita loguearse para acceder";
@@ -123,7 +123,23 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(Session::has('id')){
+            if(Session::get('id') == $id){
+                $cliente = Cliente::find($id);
+                $cliente->update([
+                    'PrimerNombre' => $request->PrimerNombre,
+                    'SegundoNombre' => $request->SegundoNombre,
+                    'PrimerApellido' => $request->PrimerApellido,
+                    'SegundoApellido' => $request->SegundoApellido,
+                    'Telefono' => $request->Telefono,
+                ]);
+                $success = "Registro modificado correctamente";
+                return redirect('../../perfil')->with('success',$success);
+            }
+        }else{
+            $prb = "Necesita loguearse para acceder";
+            return redirect('/')->with('prb',$prb);
+        }   
     }
 
     /**
