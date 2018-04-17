@@ -103,7 +103,15 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Session::has('id')){
+            if(Session::get('id') == $id){
+                $cliente = Cliente::find($id);
+                return View('Mascota.editCliente',compact('cliente'));
+            }
+        }else{
+            $prb = "Necesita loguearse para acceder";
+            return redirect('/')->with('prb',$prb);
+        }
     }
 
     /**

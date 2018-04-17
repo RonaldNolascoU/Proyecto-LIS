@@ -5,8 +5,8 @@
     <title>@yield('title')</title>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
-    <link rel="stylesheet" href="../css/login.css">
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="../../css/login.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @yield('head')
 </head>
@@ -52,20 +52,20 @@
                     <div class="background" id="bc">
                     </div>
                     <center>
-                        <a href="perfil">
-                            <img class="circle" src="img/Clientes/@yield('imagen')">
+                        <a href="../../perfil">
+                            <img class="circle" src="../../img/Clientes/@yield('imagen')">
                         </a>
                     </center>
-                    <a href="perfil">
+                    <a href="../../perfil">
                         <span class="white-text name">@yield('nombre')</span>
                     </a>
-                    <a href="perfil">
+                    <a href="../../perfil">
                         <span class="white-text email">@yield('email')</span>
                     </a>
                 </div>
             </li>
             <li>
-                <a href="perfil">
+                <a href="../../perfil">
                     <i class="material-icons">filter_list</i>Perfil
                 </a>
             </li>
@@ -97,7 +97,7 @@
                 <div class="divider"></div>
             </li>
             <li>
-                <a href="cerrar">
+                <a href="../../cerrar">
                     <i class="material-icons">highlight_off</i>Cerrar Sesion
                 </a>
             </li>
@@ -117,7 +117,7 @@
         </a>
         <ul>
             <li>
-                <a class="btn-floating red" href="cerrar" title="Cerrar Sesion">
+                <a class="btn-floating red" href="../../cerrar" title="Cerrar Sesion">
                     <i class="material-icons">highlight_off</i>
                 </a>
             </li>
@@ -132,15 +132,15 @@
                 </a>
             </li>
             <li>
-                <a class="btn-floating blue" href="perfil" title="Perfil">
+                <a class="btn-floating blue" href="../../perfil" title="Perfil">
                     <i class="material-icons">filter_list</i>
                 </a>
             </li>
         </ul>
     </div>
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/inicializacion.js"></script>
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../js/inicializacion.js"></script>
 </body>
 
 </html>
