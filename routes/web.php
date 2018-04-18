@@ -24,3 +24,5 @@ Route::post('Cliente/login','ClienteController@login');
 Route::get('perfil','MascotaController@perfil');
 
 Route::get('cerrar','ClienteController@logout');
+
+Route::post('Cliente/clave','ClienteController@clave');

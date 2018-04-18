@@ -54,8 +54,27 @@
     </div>
     <div id="modal1" class="modal">
         <div class="modal-content">
-            <h4>Cambiar clave</h4>
-            
+            <h4 class="teal-text">Cambiar clave</h4>
+            <div class="container">
+                <form method="post" action="Cliente/clave">
+                    {{ csrf_field() }}
+                    <div class="input-field col xl12">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input id="Clave" name="Clave" type="password" class="validate">
+                        <label for="Clave">Password</label>
+                    </div>
+                    <div class="input-field col xl12">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input id="Confirm" name="Confirm" type="password" class="validate">
+                        <label for="Confirm">Confirmacion</label>
+                    </div>
+                    <div class="col xl12 center-align">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Cambiar
+                            <i class="material-icons right">autorenew</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>

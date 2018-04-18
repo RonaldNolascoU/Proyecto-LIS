@@ -184,4 +184,19 @@ class ClienteController extends Controller
         $success = "Vuelva pronto";
         return redirect('/');
     }
+
+    public function clave(Request $request){
+        $cliente = Cliente::find(Session::get('id'));
+        $pass = Crypt::encrypt($request->Clave);
+        if($request->Clave == $request->Confirm){
+            $cliente->update([
+                'clave' => $pass,
+            ]);
+            $success = "Clave cambiada correctamente";
+            return redirect('../../perfil')->with('success',$success);
+        }else{
+            $prb = "La clave y la confirmacion no coinciden";
+            return redirect('../../perfil')->with('prb',$prb);
+        }
+    }
 }
