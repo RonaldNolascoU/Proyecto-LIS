@@ -43,3 +43,20 @@ hr{
 #btn-img{
     margin-left: -8%;
 }
+
+input[type=file].hidden {
+    color: transparent;
+  }
+
+.cambio{
+    width: 100%;
+    margin: auto;
+    height: 130px;
+}
+#files{
+    margin-left: 15%;
+}
+
+input[type=button] {
+    color: white;
+  }

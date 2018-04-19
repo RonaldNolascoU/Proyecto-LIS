@@ -18,7 +18,7 @@
                 <div class="col xl12 center-align">
                     <br>
                     <img src="../img/Clientes/{{$cliente->imagen}}" alt="Imagen de perfil" class="circle">
-                    <a id="btn-img" title="Cambiar imagen" class="btn-floating btn-large">
+                    <a id="btn-img" title="Cambiar imagen" href="#modal2" class="modal-trigger btn-floating btn-large">
                         <i class="material-icons">cached</i>
                     </a>
                 </div>
@@ -80,4 +80,65 @@
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>
         </div>
     </div>
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <h4 class="teal-text">Cambiar imagen</h4>
+            <div class="container">
+                <form method="post" id="frmImagen" action="Cliente/imagen" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col xl4">
+                            <img class="circle cambio" src="../img/Clientes/{{$cliente->imagen}}" alt="">
+                            <br>
+                            <center><span>Imagen actual</span></center>
+                        </div>
+                        <div class="col xl4">
+                            <br><br><br>
+                            <input class="hidden" id="files" name="files" type="file" class="validate" accept="image/png, .jpeg, .jpg" required/>
+                        </div>
+                        <div class="col xl4">
+                            <output id="list"></output>
+                            <br>
+                            <center><span id="nv"></span></center>
+                        </div>
+                        <div class="col xl12 center-align">
+                            <button type="submit" id="btnCambiar" class="btn waves-effect waves-light white-text" name="action">
+                                Cambiar<i class="material-icons right">autorenew</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function archivo(evt) {
+            var files = evt.target.files; // FileList object
+       
+            //Obtenemos la imagen del campo "file". 
+            for (var i = 0, f; f = files[i]; i++) {         
+                //Solo admitimos imágenes.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+           
+                var reader = new FileReader();
+               
+                reader.onload = (function(theFile) {
+                   return function(e) {
+                   // Creamos la imagen.
+                          document.getElementById("list").innerHTML = ['<img class="circle cambio" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                            document.getElementById("nv").innerHTML = "Imagen nueva"
+                   };
+               })(f);
+     
+               reader.readAsDataURL(f);
+            }
+    }
+    document.getElementById('files').addEventListener('change', archivo, false);
+    </script>
 @endsection

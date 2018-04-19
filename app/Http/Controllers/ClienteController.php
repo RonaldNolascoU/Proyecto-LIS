@@ -199,4 +199,33 @@ class ClienteController extends Controller
             return redirect('../../perfil')->with('prb',$prb);
         }
     }
+
+    public function imagen(Request $request){
+        try{
+            if($request->hasFile('files')){
+                $cliente = Cliente::find(Session::get('id'));
+                if(\File::exists(public_path('img/Clientes/'.$cliente->imagen))){
+                    \File::delete(public_path('img/Clientes/'.$cliente->imagen));
+                    $file = $request->file('files');
+                    $file_name = $cliente->PrimerNombre.$cliente->PrimerApellido.$file->getClientOriginalName();
+
+                    Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
+                    $cliente->update([
+                        'Imagen'=>$file_name,
+                    ]);
+                    $success = "Imagen de perfil cambiada correctamente";
+                    return redirect('../../perfil')->with('success',$success);
+                  }else{
+                    $prb = "Ocurrio un problema inesperado";
+                    return redirect('../../perfil')->with('prb',$prb);
+                  }
+            }else{
+                $prb = "No se encontro la imagen de actualizacion";
+                return redirect('../../perfil')->with('prb',$prb);    
+            }
+        }catch(QueryException $ex){
+            $prb = "Ocurrio un problema inesperado";
+            return redirect('../../perfil')->with('prb',$prb);
+        }
+    }
 }

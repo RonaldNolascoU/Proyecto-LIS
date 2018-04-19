@@ -26,3 +26,5 @@ Route::get('perfil','MascotaController@perfil');
 Route::get('cerrar','ClienteController@logout');
 
 Route::post('Cliente/clave','ClienteController@clave');
+
+Route::post('Cliente/imagen','ClienteController@imagen');
