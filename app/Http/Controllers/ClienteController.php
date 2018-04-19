@@ -182,7 +182,7 @@ class ClienteController extends Controller
     public function perfil()
     {
         $cliente = Cliente::find(Session::get('id'));
-        return view('Mascota.perfil', compact('cliente'));
+        return view('Cliente.perfil', compact('cliente'));
     }
 
     public function logout(){

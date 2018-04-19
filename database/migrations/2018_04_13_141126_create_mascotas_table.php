@@ -18,6 +18,7 @@ class CreateMascotasTable extends Migration
             $table->increments('id');
             $table->string('NombreMascota',35);
             $table->date('FechaNacimiento');
+            $table->text('imagen');
             $table->unsignedInteger('tipo_id');
             $table->unsignedInteger('cliente_id');
             $table->foreign('tipo_id')->references('id')->on('tipo_mascotas')->onDelete('cascade');

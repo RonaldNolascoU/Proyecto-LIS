@@ -18,8 +18,6 @@ Route::get('/', function () {
 //Rutas de mantenimiento de cliente
 Route::resource('Cliente','ClienteController');
 
-Route::resource('Mascota','MascotaController');
-
 Route::post('Cliente/login','ClienteController@login');
 
 Route::get('perfil','ClienteController@perfil')->middleware('login');
@@ -31,4 +29,8 @@ Route::post('Cliente/clave','ClienteController@clave')->middleware('login');
 Route::post('Cliente/imagen','ClienteController@imagen')->middleware('login');
 //-----------------------------------------------------
 
-//Rutas de mantenimiento de cliente
+//Rutas de mantenimiento de mascotas
+
+Route::resource('Mascota','MascotaController');
+
+//-----------------------------------------------------
