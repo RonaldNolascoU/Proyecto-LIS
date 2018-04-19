@@ -179,6 +179,12 @@ class ClienteController extends Controller
         }
     }
 
+    public function perfil()
+    {
+        $cliente = Cliente::find(Session::get('id'));
+        return view('Mascota.perfil', compact('cliente'));
+    }
+
     public function logout(){
         Session::flush();
         $success = "Vuelva pronto";

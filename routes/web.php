@@ -15,16 +15,20 @@ Route::get('/', function () {
     return view('index');
 });
 
+//Rutas de mantenimiento de cliente
 Route::resource('Cliente','ClienteController');
 
 Route::resource('Mascota','MascotaController');
 
 Route::post('Cliente/login','ClienteController@login');
 
-Route::get('perfil','MascotaController@perfil');
+Route::get('perfil','ClienteController@perfil')->middleware('login');
 
-Route::get('cerrar','ClienteController@logout');
+Route::get('cerrar','ClienteController@logout')->middleware('login');
 
-Route::post('Cliente/clave','ClienteController@clave');
+Route::post('Cliente/clave','ClienteController@clave')->middleware('login');
 
-Route::post('Cliente/imagen','ClienteController@imagen');
+Route::post('Cliente/imagen','ClienteController@imagen')->middleware('login');
+//-----------------------------------------------------
+
+//Rutas de mantenimiento de cliente
