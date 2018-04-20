@@ -24,8 +24,7 @@ class MascotaController extends Controller
     public function index()
     {
         $cliente = Cliente::find(Session::get('id'));
-        $mascotas = Mascota::where(['cliente_id'=>Session::get('id')])->get();
-        return view('Mascota.index', compact('mascotas','cliente'));
+        return view('Mascota.index', compact('cliente'));
     }
 
     /**
@@ -52,7 +51,7 @@ class MascotaController extends Controller
             if($request->hasFile('Imagen')){
                 $file = $request->file('Imagen');
                 $file_name = Session::get('id').$file->getClientOriginalName();
-                Image::make($file)->resize(200,200)->save('img/Mascotas/'.$file_name);
+                Image::make($file)->resize(300,300)->save('img/Mascotas/'.$file_name);
                 Mascota::create([
                     'NombreMascota' => $request->Nombre,
                     'FechaNacimiento' => $request->Fecha,
@@ -61,7 +60,7 @@ class MascotaController extends Controller
                     'cliente_id' => Session::get('id'),
                 ]);
                 $success = "Mascota ingresada correctamente";
-                return redirect('../../perfil')->with('success',$success);
+                return redirect()->route('Mascota.index')->with('success',$success);
             }else{
                 $prb = "La imagen es obligatoria";
                 return redirect()->route('Mascota.create')->with('prb',$prb);
@@ -80,7 +79,9 @@ class MascotaController extends Controller
      */
     public function show($id)
     {
-        //
+        $mascota = Mascota::find($id);
+        $cliente = Cliente::find(Session::get('id'));
+        return view('Mascota.show', compact('cliente','mascota'));
     }
 
     /**
