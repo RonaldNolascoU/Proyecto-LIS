@@ -61,7 +61,7 @@
                     </div>
                     <div class="input-field col xl12">
                         <i class="material-icons prefix">camera_alt</i>
-                        <input id="Imagen" name="Imagen" type="file" class="validate">
+                        <input id="Imagen" name="Imagen" type="file" accept="image/png, .jpeg, .jpg" class="validate">
                     </div>
                     <div class="col xl5 offset-xl7 s5 offset-s3">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Registrar

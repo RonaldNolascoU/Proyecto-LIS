@@ -60,3 +60,7 @@ input[type=file].hidden {
 input[type=button] {
     color: white;
   }
+
+#frmMascota{
+    margin-bottom: 33.5%;
+}

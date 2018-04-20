@@ -79,7 +79,7 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a href="#" id="mvd">
+                                    <a href="{{route('Mascota.create')}}" id="mvd">
                                         <i class="material-icons">add</i>Ingresar mascota</a>
                                 </li>
                                 <li>
@@ -120,7 +120,7 @@
                 </a>
             </li>
             <li>
-                <a class="btn-floating green" title="Agregar mascota">
+                <a class="btn-floating green" href="{{route('Mascota.create')}}" title="Agregar mascota">
                     <i class="material-icons">add</i>
                 </a>
             </li>
