@@ -15,6 +15,9 @@ class CreateCaracteristicasTable extends Migration
     {
         Schema::create('caracteristicas', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('DescripcionCaracteristica');
+            $table->unsignedInteger('mascota_id');
+            $table->foreign('mascota_id')->references('id')->on('mascotas')->onDelete('cascade');
             $table->timestamps();
         });
     }
