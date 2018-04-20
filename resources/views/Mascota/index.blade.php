@@ -22,7 +22,7 @@
                             <div class="card">
                                 <div class="card-image">
                                     <img src="img/Mascotas/{{$mascota->imagen}}">
-                                    <a href="{{route('Mascota.show',$mascota->id)}}" class="btn-floating btn-large halfway-fab waves-effect waves-light red">
+                                    <a href="{{route('Mascota.show',$mascota->id)}}" class="btn-floating btn-large halfway-fab waves-effect waves-light blue">
                                         <i class="material-icons">add</i>
                                     </a>
                                 </div>
