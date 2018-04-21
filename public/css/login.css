@@ -64,3 +64,7 @@ input[type=button] {
 #frmMascota{
     margin-bottom: 33.5%;
 }
+
+.btn-min{
+    margin-top: -0.5% !important;
+}

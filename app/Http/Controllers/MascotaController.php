@@ -115,6 +115,13 @@ class MascotaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            Mascota::find($id)->delete();
+            $success = "Mascota eliminada correctamente";
+            return redirect()->route('Mascota.index')->with('success',$success);
+        }catch(QueryException $ex){
+            $prb = "Ocurrio un problema inesperado, intentelo nuevamente";
+            return redirect()->route('Mascota.create')->with('prb',$prb);
+        }
     }
 }

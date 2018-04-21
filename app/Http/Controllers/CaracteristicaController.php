@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Caracteristica;
 
 class CaracteristicaController extends Controller
 {
@@ -34,7 +35,17 @@ class CaracteristicaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            Caracteristica::create([
+                'DescripcionCaracteristica' => $request->Caracteristica,
+                'mascota_id' => $request->id,
+            ]);
+            $success = "Caracteristica ingresada correctamente";
+            return redirect()->route('Mascota.show',$request->id)->with('success',$success);   
+        }catch(QueryException $ex){
+            $prb = "Ocurrio un problema inesperado, intentelo nuevamente";
+            return redirect()->route('Mascota.show',$request->id)->with('prb',$prb);
+        }
     }
 
     /**
@@ -79,6 +90,15 @@ class CaracteristicaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $caracteristica = Caracteristica::find($id);
+            $mascota = $caracteristica->mascota;
+            $caracteristica->delete();
+            $success = "Caracteristica eliminada correctamente";
+            return redirect()->route('Mascota.show',$mascota)->with('success',$success);   
+        }catch(QueryException $ex){
+            $prb = "Ocurrio un problema inesperado, intentelo nuevamente";
+            return redirect()->route('Mascota.show',$mascota)->with('prb',$prb);
+        }
     }
 }
