@@ -1,6 +1,6 @@
 @extends('layouts.logueado') 
 
-@section('title','Perfil') 
+@section('title','Lista de mascotas') 
 
 @section('head')
 @endsection 
