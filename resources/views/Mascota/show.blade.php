@@ -65,7 +65,7 @@
                             <div class="col xl10 offset-xl1">
                                 <ul class="collection with-header">
                                     <li class="collection-header">
-                                        <h4>Caracteristica</h4>
+                                        <h4>Caracteristicas</h4>
                                     </li>
                                     @foreach($mascota->caracteristicas as $caracteristica)
                                         <li class="collection-item">
@@ -73,7 +73,7 @@
                                                 <form id="EC-{{$caracteristica->id}}" class="secondary-content btn-min" action="{{route('Caracteristica.destroy',$caracteristica->id)}}" method="post">
                                                     {{csrf_field()}}
                                                     <input name="_method" type="hidden" value="DELETE">
-                                                    <button class="btn-floating waves-effect waves-light red btn-small" type="submit" name="action">
+                                                    <button class="btn-floating waves-effect waves-light red btn-small" type="button" onclick="eliminarCaracteristica('{{$caracteristica->id}}')" name="action">
                                                         <i class="material-icons">delete</i>
                                                     </button>
                                                 </form>
@@ -116,13 +116,5 @@
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#btnEliminarMascota').bind('click', function(){
-            if(confirm('Seguro desea borrar esta mascota')){
-                $('#eliminar').submit();
-            }
-        });
-    });
-</script>
+<script type="text/javascript" src="../../js/confirmacion.js"></script>
 @endsection
