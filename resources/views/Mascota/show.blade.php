@@ -23,7 +23,7 @@
                     <div class="col xl12 center-align">
                         <br>
                         <img src="../img/Mascotas/{{$mascota->imagen}}" alt="Imagen de perfil" class="circle">
-                        <a id="btn-img" title="Cambiar imagen" href="#modal3" class="modal-trigger blue btn-floating btn-large">
+                        <a id="btn-img" title="Cambiar imagen" href="#modal5" class="modal-trigger blue btn-floating btn-large">
                             <i class="material-icons">cached</i>
                         </a>
                     </div>
@@ -42,7 +42,7 @@
                     <div class="col xl11 offset-xl1">
                         <div class="row">
                             <div class="col xl4 center-align">
-                                    <a id="btn-img" title="Cambiar imagen" href="#modal4" class="modal-trigger waves-effect waves-light btn teal">
+                                    <a id="btn-img" title="Ingresar caracteristica" href="#modal4" class="modal-trigger waves-effect waves-light btn teal">
                                         <i class="material-icons left">add_circle_outline</i>Ingresar caracteristica</a>
                             </div>
                             <div class="col xl4 center-align">
@@ -116,5 +116,48 @@
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>
     </div>
 </div>
+<div id="modal5" class="modal">
+    <div class="modal-content">
+        <h4 class="teal-text">Cambiar imagen</h4>
+        <div class="container">
+            <form method="post" id="frmImagen" action="imagen" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="col xl4">
+                        <img class="circle cambio" src="../img/Mascotas/{{$mascota->imagen}}" alt="">
+                        <br>
+                        <center>
+                            <span>Imagen actual</span>
+                        </center>
+                    </div>
+                    <div class="col xl4">
+                        <br>
+                        <br>
+                        <br>
+                        <input class="hidden" id="files" name="files" type="file" class="validate" accept="image/png, .jpeg, .jpg" required/>
+                        <input type="hidden" name="id" value="{{$mascota->id}}">
+                    </div>
+                    <div class="col xl4">
+                        <output id="list"></output>
+                        <br>
+                        <center>
+                            <span id="nv"></span>
+                        </center>
+                    </div>
+                    <div class="col xl12 center-align">
+                        <button type="submit" id="btnCambiar" class="btn waves-effect waves-light white-text" name="action">
+                            Cambiar
+                            <i class="material-icons right">autorenew</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>
+    </div>
+</div>
 <script type="text/javascript" src="../../js/confirmacion.js"></script>
+<script type="text/javascript" src="../../js/imagen.js"></script>
 @endsection

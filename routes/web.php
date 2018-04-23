@@ -35,4 +35,6 @@ Route::resource('Mascota','MascotaController');
 
 Route::resource('Caracteristica','CaracteristicaController');
 
+Route::post('Mascota/imagen','MascotaController@imagen')->middleware('login');
+
 //-----------------------------------------------------
