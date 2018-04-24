@@ -29,6 +29,9 @@
                     <div class="col s4 offset-s4">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Entrar</button>
                     </div>
+                    <div class="col s12 center-align">
+                        <a href="{{route('login')}}" class="option black-text">Eres administrativo?</a>
+                    </div>
                 </form>
             </div>
         </div>

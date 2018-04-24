@@ -27,3 +27,12 @@ body{
     bottom: 10%;
     left: auto !important;  
 }
+
+.option:hover{
+    color: #039be5 !important;
+    text-decoration: underline;
+}
+
+.teal{
+    background-color: #b2ebf2;
+}
