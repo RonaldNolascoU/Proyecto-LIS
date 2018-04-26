@@ -29,7 +29,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand white-text" href="{{ url('/') }}">
+                    <a class="navbar-brand white-text" href="#">
                         StarPets
                     </a>
                 </div>
@@ -47,7 +47,7 @@
                             <li><a href="/">Login de clientes</a></li>
                         @else
                             @if(Auth::user()->roles()->first()->Name == "Secretaria")
-                                <li><a href="">Ingresar consultas</a></li>
+                                <li><a href="{{route('Consulta.create')}}">Ingresar consultas</a></li>
                             @endif
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>

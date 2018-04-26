@@ -3,4 +3,8 @@ $(document).ready(function () {
     $('.collapsible').collapsible();
     $('.modal').modal();
     $('select').formSelect();
+    $('select').on('DOMSubtreeModified', function() {
+        $(this).formSelect();
+      });
+    $(".dropdown-trigger").dropdown();
 });

@@ -234,4 +234,9 @@ class ClienteController extends Controller
             return redirect('../../perfil')->with('prb',$prb);
         }
     }
+
+    public function ajax(Request $request){
+        $cliente = CLiente::where('correo',$request->correo)->first();
+        return response()->json($cliente->mascotas);
+    }
 }

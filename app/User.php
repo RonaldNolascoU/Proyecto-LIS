@@ -62,4 +62,8 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function consultas(){
+        return $this->hasMany('App\Consulta','user_id');
+    }
 }

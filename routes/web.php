@@ -39,6 +39,18 @@ Route::post('Mascota/imagen','MascotaController@imagen')->middleware('login');
 
 //-----------------------------------------------------
 
+//Rutas de usuarios
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('Consulta','ConsultaController');
+
+//-----------------------------------------------------
+
+//Rutas AJAX
+
+Route::post('/clienteMascota', 'ClienteController@ajax');
+
+//-----------------------------------------------------

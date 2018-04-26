@@ -15,4 +15,8 @@ class Mascota extends Model
     public function caracteristicas(){
         return $this->hasMany('App\Caracteristica','mascota_id');
     }
+
+    public function consultas(){
+        return $this->hasMany('App\Consulta','mascota_id');
+    }
 }
