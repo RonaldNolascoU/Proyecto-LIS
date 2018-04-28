@@ -47,6 +47,7 @@
                             <li><a href="/">Login de clientes</a></li>
                         @else
                             @if(Auth::user()->roles()->first()->Name == "Secretaria")
+                                <li><a href="{{route('Consulta.index')}}">Consultas</a></li>
                                 <li><a href="{{route('Consulta.create')}}">Ingresar consultas</a></li>
                             @endif
                             <li class="dropdown">

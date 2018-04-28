@@ -12,6 +12,10 @@ class Mascota extends Model
         return $this->belongsTo('App\TipoMascota','tipo_id');
     }
 
+    public function cliente(){
+        return $this->belongsTo('App\Cliente','cliente_id');
+    }
+
     public function caracteristicas(){
         return $this->hasMany('App\Caracteristica','mascota_id');
     }

@@ -39,14 +39,14 @@
         </li>
     </ul>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-        </form>
+        {{ csrf_field() }}
+    </form>
     <nav>
         <div class="nav-wrapper teal lighten-2">
             <a href="#!" class="brand-logo">StarPets</a>
             <ul class="right hide-on-med-and-down">
                 <li>
-                    <a href=""><i class="material-icons left">import_contacts</i>Consultas</a>
+                    <a href="{{route('Consulta.index')}}"><i class="material-icons left">import_contacts</i>Consultas</a>
                 </li>
                 <li>
                     <a href="{{route('Consulta.create')}}"><i class="material-icons left">add</i>Ingresar consultas</a>

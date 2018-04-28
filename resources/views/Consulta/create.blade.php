@@ -3,6 +3,7 @@
 @section('title','Ingresar consulta') 
 
 @section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
@@ -61,26 +62,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#Cliente').keyup(function(e){
-                e.preventDefault();
-                $.ajax({
-                    type: 'POST',
-                    url: '/clienteMascota',
-                    data: {correo: $('#Cliente').val(), _token: '{{csrf_token()}}'},
-                    success: function(mascotas){
-                        $('#Mascota').empty();
-                        mascotas.forEach(function(valor,indice){
-                            $('#Mascota').append(new Option(valor.NombreMascota, valor.id, true, true));
-                        });
-                    },
-                    error: function(){
-                        $('#Mascota').empty();
-                        $('#Mascota').append('<option value="" disabled selected>Choose your option</option>');
-                    }
-                });
-            });
-        });
-    </script>
+    <script type="text/javascript" src="../../js/correo.js"></script>
 @endsection

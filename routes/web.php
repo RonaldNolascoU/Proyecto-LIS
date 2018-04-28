@@ -47,10 +47,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('Consulta','ConsultaController');
 
+Route::post('/pasar','ConsultaController@pasar');
+
 //-----------------------------------------------------
 
 //Rutas AJAX
 
 Route::post('/clienteMascota', 'ClienteController@ajax');
+
+Route::post('/listaEntrantes','ConsultaController@llenarEntrantes');
+
+Route::post('/conseguirMascota','ConsultaController@conseguirMascota');
+
+Route::post('/conseguirVeterinario','ConsultaController@conseguirVeterinario');
 
 //-----------------------------------------------------
