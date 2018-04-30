@@ -71,8 +71,11 @@ class ClienteController extends Controller
                     'clave' => ''.$pass.'',
                     'Imagen' => $file_name,
                 ]);
-                $success = "Registro ingresado correctamente";
-                return redirect('/')->with('success',$success);
+                $cliente = Cliente::where(['Correo'=>$request->Correo])->first();
+                Session::put('correo',$request->correo);
+                Session::put('id',$cliente->id);
+                $success = "Bienvenido";
+                return redirect('perfil')->with('success',$success);
             }else{
                 $prb = "La imagen es obligatoria";
                 return redirect()->route('Cliente.create')->with('prb',$prb);
