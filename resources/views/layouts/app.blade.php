@@ -1,84 +1,60 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Login</title>
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
-</head>
+    <head>
+        <title>Login</title>
+        <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="../../css/user.css" media="screen,projection" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        @yield('head')
+        <script src="../../js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="../../js/materialize.min.js"></script>
+        <script type="text/javascript" src="../../js/inicializacion.js"></script>
+    </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top teal">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand white-text" href="#">
-                        StarPets
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="/">Login de clientes</a></li>
-                        @else
-                            @if(Auth::user()->roles()->first()->Name == "Secretaria")
-                                <li><a href="{{route('Consulta.index')}}">Consultas</a></li>
-                                <li><a href="{{route('Consulta.create')}}">Ingresar consultas</a></li>
-                            @endif
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+    <ul id="dropdown1" class="dropdown-content">
+        <li>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+        </li>
+    </ul>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
+    <nav>
+        <div class="nav-wrapper teal lighten-2">
+            <a href="#!" class="brand-logo">StarPets</a>
+            <ul class="right hide-on-med-and-down">
+                    @guest
+                        <li><a href="/">Login de clientes</a></li>
+                        <li><a href="{{route('login')}}">Login de usuarios</a></li>
+                    @else 
+                        @if(Auth::user()->roles()->first()->Name == "Secretaria")
+                            <li>
+                                <a href="{{route('Consulta.index')}}"><i class="material-icons left">import_contacts</i>Consultas</a>
                             </li>
-                        @endguest
-                    </ul>
-                </div>
+                            <li>
+                                <a href="{{route('Consulta.create')}}"><i class="material-icons left">add</i>Ingresar consultas</a>
+                            </li>
+                            <li>
+                                <a href="/home"><i class="material-icons left">home</i>Inicio</a>
+                            </li>
+                        @endif
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="dropdown1">{{Auth::user()->name}}
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                    @endguest
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col xl12 card horizontal" >
+                @yield('content')
             </div>
-        </nav>
-
-        @yield('content')
+        </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
