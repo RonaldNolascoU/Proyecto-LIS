@@ -63,10 +63,8 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
-        <div class="row">
-                @yield('content')
-        </div>
+    <div  id="panel">
+        @yield('content')
     </div>
 </body>
 </html>

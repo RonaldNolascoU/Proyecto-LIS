@@ -7,28 +7,29 @@
 @endsection
 
 @section('content')
-    <div class="col xl12" id="panel">
-        <div class="row">
+    <div class="row">
+        <div class="col xl9">
             <div class="col xl12">
                 <div class="row">
                     <div class="col xl12">
-                        <h4 class="center-align teal-text">Consultas entrantes</h4>
-                    </div>
-                    <div class="col xl10 offset-xl1">
-                        <table id="entrantes" class="highlight centered">
-                            <thead>
-                                <tr>
-                                    <th>Mascota</th>
-                                    <th>Veterinario</th>
-                                    <th>Cambiar veterinario</th>
-                                    <th>Detalles</th>
-                                    <th>Eliminar</th>
-                                    <th>Pasar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if($consultasIngresadas->count())
-                                    @foreach($consultasIngresadas as $consulta)
+                        <div class="row">
+                            <div class="col xl12">
+                                <h4 class="center-align teal-text">Consultas entrantes</h4>
+                            </div>
+                            <div class="col xl10 offset-xl1">
+                                <table id="entrantes" class="highlight centered">
+                                    <thead>
+                                        <tr>
+                                            <th>Mascota</th>
+                                            <th>Veterinario</th>
+                                            <th>Cambiar veterinario</th>
+                                            <th>Detalles</th>
+                                            <th>Eliminar</th>
+                                            <th>Pasar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if($consultasIngresadas->count()) @foreach($consultasIngresadas as $consulta)
                                         <tr class="info">
                                             <td>{{$consulta->mascota->NombreMascota}}</td>
                                             <td>
@@ -63,45 +64,53 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="6">No hay registros</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
+                                        @endforeach @else
+                                        <tr>
+                                            <td colspan="6">No hay registros</td>
+                                        </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col xl6">
+                        <div class="row">
+                            <div class="col xl12">
+                                <h4 class="center-align teal-text">Consultas por pagar</h4>
+                            </div>
+                            <div class="col xl10 offset-xl1">
+                                <table class="highlight">
+                                    <thead>
+                                        <tr>
+                                            <th>Mascota</th>
+                                            <th>Veterinario</th>
+                                            <th>Hora</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if($consultasTerminadas->count()) @else
+                                        <tr>
+                                            <td colspan="5" class="center-align">No hay registros</td>
+                                        </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col xl6">
-                <div class="row">
-                <div class="col xl12">
-                        <h4 class="center-align teal-text">Consultas por pagar</h4>
-                    </div>
-                    <div class="col xl10 offset-xl1">
-                        <table class="highlight">
-                            <thead>
-                                <tr>
-                                    <th>Mascota</th>
-                                    <th>Veterinario</th>
-                                    <th>Hora</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if($consultasTerminadas->count())
-                                @else
-                                    <tr>
-                                        <td colspan="5" class="center-align">No hay registros</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="col xl3">
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <h4>Veterinarios desocupados</h4>
+                </li>
+                <li class="collection-item">Kevin Romero</li>
+            </ul>
         </div>
     </div>
     <div id="modal6" class="modal">
