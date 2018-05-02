@@ -49,6 +49,8 @@ Route::resource('Consulta','ConsultaController');
 
 Route::post('/pasar','ConsultaController@pasar');
 
+Route::resource('Sintoma','SintomaController');
+
 //-----------------------------------------------------
 
 //Rutas AJAX

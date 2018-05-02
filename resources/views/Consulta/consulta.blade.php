@@ -69,6 +69,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col xl12">
+                                                <h6 class="teal-text">Diagnostico</h6>
+                                                <div class="col xl12">
+                                                    <div class="row">
+                                                        <div class="col xl6">
+                                                            <div class="card">
+                                                                <div class="card-image teal white-text center-align">
+                                                                    <i class="material-icons large">gps_not_fixed</i>
+                                                                </div>
+                                                                <div class="card-content">
+                                                                    <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                                                                </div>
+                                                                <div class="card-tabs">
+                                                                    <ul class="tabs tabs-fixed-width">
+                                                                        <li class="tab"><a href="#test4">Test 1</a></li>
+                                                                        <li class="tab"><a class="active" href="#test5">Test 2</a></li>
+                                                                        <li class="tab"><a href="#test6">Test 3</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="card-content grey lighten-4">
+                                                                    <div id="test4">Test 1</div>
+                                                                    <div id="test5">Test 2</div>
+                                                                    <div id="test6">Test 3</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -134,12 +165,58 @@
                 verificar();
             });
             $(document).on('click','#ingresarSintoma',function(){
+                var id = $('#id').val();
                 var sintoma = $('#Sintoma').val();
+                sintoma = sintoma.trim();
                 if(sintoma != ""){
                     $('#listaSintomas').empty();
-                    $('#listaSintomas').append('<li class="collection-header teal-text"><h6 class="center-align">Sintomas</h6></li>')
+                    $.ajax({
+                        type: 'POST',
+                        url: '../../Sintoma',
+                        data: { id: id, sintoma: sintoma },
+                        success: function (sintomas) {
+                            console.log(sintomas)
+                            $('#listaSintomas').append('<li class="collection-header teal-text"><h6 class="center-align">Sintomas</h6></li>');
+                            sintomas.forEach(function(valor,indice){
+                                $('#listaSintomas').append('<li class="c-item"><div class="valor-li"><span>'+ valor.DescripcionSintoma +'</span></div><div valid="' + valor.id + '" class="btn-li eliminarSintoma"><a class="btn-floating waves-effect waves-light red btn-small"><i class="material-icons tiny">remove</i></a></div></li>');
+                            });
+                            $('#Sintoma').val("");
+                            $('#Sintoma').focus();
+                        },
+                        error: function(){
+
+                        }
+                    })
+                }else{
+                    M.toast({html: "El campo de sintomas debe estar lleno"})
+                    $('#Sintoma').val("");
+                    $('#Sintoma').focus();
                 }
             });
+            $(document).on('click','.eliminarSintoma', function(){
+                var id = $('#id').val();
+                var id = this.getAttribute('valid');
+                if(confirm('Seguro desea eliminar este sintoma')){
+                    $.ajax({
+                        type: 'POST',
+                        url: '../../Sintoma/'+id,
+                        data: { _method: 'DELETE', consulta_id: id },
+                        success: function (sintomas) {
+                            console.log(sintomas)
+                            $('#listaSintomas').empty();
+                            $('#listaSintomas').append('<li class="collection-header teal-text"><h6 class="center-align">Sintomas</h6></li>');
+                            sintomas.forEach(function(valor,indice){
+                                $('#listaSintomas').append('<li class="c-item"><div class="valor-li"><span>'+ valor.DescripcionSintoma +'</span></div><div valid="' + valor.id + '" class="btn-li eliminarSintoma"><a class="btn-floating waves-effect waves-light red btn-small"><i class="material-icons">remove</i></a></div></li>');
+                            });
+                            $('#Sintoma').val("");
+                            $('#Sintoma').focus();
+                        },
+                        error: function () {
+                            
+                        }
+                    })
+                }
+            })
         });
     </script>
 @endsection

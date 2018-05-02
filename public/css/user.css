@@ -21,3 +21,25 @@ body{
 #login{
     background-color: #eceff1;
 }
+
+.toast{
+    background-color: #d32f2f;
+}
+
+.btn-li{
+    width: 15%;
+    float: left;
+}
+
+.valor-li{
+    width: 85%;
+    float: left;
+}
+
+.c-item{
+    background-color:#fff;
+    width: 100%;
+    padding: 2%;
+    float: left;
+    border-bottom:1px solid #e0e0e0
+}
