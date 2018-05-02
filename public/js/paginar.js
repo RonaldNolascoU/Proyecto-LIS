@@ -16,12 +16,12 @@
     /* función privada*/
     function createTableFooterPagination(idTable, nTdsColspan, last)
     {
-        var pagination = "<span><button class='btn paginationInit'><<</button></span> ";
+        var pagination = '<ul class="pagination"><li class="waves-effect"><a href="#!" class="paginationInit"><i class="material-icons">chevron_left</i></a></li>';
         for (var i = 1; i <= last; i++)
         {
-            pagination += "<span><button class='btn paginationClick'>" + i + "</button></span> ";
+            pagination += '<li class="waves-effect"><a href="#!" class="paginationClick">' + i + '</a></li>';
         }
-        pagination += "<span><button class='btn paginationEnd'>>></button></span>"
+        pagination += '<li class="waves-effect"><a href="#!" class="paginationEnd"><i class="material-icons">chevron_right</i></a></li></ul>';
         tfoot = "<tfoot><tr><td colspan='" + nTdsColspan + "'><center>" + pagination + "</center></td></tr></tfoot>";
          
         idTable

@@ -183,4 +183,16 @@ class ConsultaController extends Controller
             return redirect()->route('Consulta.index')->with('prb',$prb);
         }
     }
+
+    public function veterinarios(){
+        $users = User::all();
+        $vet = [];
+        foreach ($users as $user) {
+            $cuenta = Consulta::where(['user_id'=>$user->id, 'Estado'=>2])->count();
+            if($cuenta == 0 AND $user->hasRole('Veterinario')){
+                array_push($vet,$user);
+            }
+        }
+        return $vet;
+    }
 }

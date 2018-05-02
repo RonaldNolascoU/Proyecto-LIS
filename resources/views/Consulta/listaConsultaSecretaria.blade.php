@@ -18,7 +18,7 @@
                             </div>
                             <div class="col xl10 offset-xl1">
                                 <table id="entrantes" class="highlight centered">
-                                    <thead>
+                                    <!--<thead>
                                         <tr>
                                             <th>Mascota</th>
                                             <th>Veterinario</th>
@@ -69,7 +69,7 @@
                                             <td colspan="6">No hay registros</td>
                                         </tr>
                                         @endif
-                                    </tbody>
+                                    </tbody>-->
                                 </table>
                             </div>
                         </div>
@@ -105,11 +105,7 @@
             </div>
         </div>
         <div class="col xl3">
-            <ul class="collection with-header">
-                <li class="collection-header">
-                    <h4>Veterinarios desocupados</h4>
-                </li>
-                <li class="collection-item">Kevin Romero</li>
+            <ul class="collection with-header" id="listaLibres">
             </ul>
         </div>
     </div>
@@ -224,7 +220,7 @@
         }
         function llenar(){
             $('.info').remove();
-            document.getElementById("entrantes").innerHTML = "<thead><tr><th>Mascota</th><th>Veterinario</th><th>Cambiar veterinario</th><th>Detalles</th><th>Eliminar</th></tr></thead><tbody>";
+            document.getElementById("entrantes").innerHTML = "<thead><tr><th>Mascota</th><th>Veterinario</th><th>Cambiar veterinario</th><th>Detalles</th><th>Eliminar</th><th>Pasar</th></tr></thead><tbody>";
             $.ajax({
                 type: 'POST',
                 url: '/listaEntrantes',
@@ -236,25 +232,44 @@
                             veterinario(valor.user_id)
                         });
                         document.getElementById("entrantes").innerHTML += "</tbody>"
-                        $("#entrantes").paginationTdA({
-                            elemPerPage: 5
-                        });
                     }else{
                         $('#entrantes').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
                         document.getElementById("entrantes").innerHTML += "</tbody>"
                     }
+                    $("#entrantes").paginationTdA({
+                        elemPerPage: 5
+                    });
                 },
                 error: function () {
                     $('#entrantes').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
                     document.getElementById("entrantes").innerHTML += "</tbody>"
+                    $("#entrantes").paginationTdA({
+                        elemPerPage: 5
+                    });
+                }
+            });
+        }
+        function libres(){
+            $('#listaLibres').empty();
+            $('#listaLibres').append('<li class="collection-header teal-text"><h4 class="center-align">Veterinarios desocupados</h4></li>');
+            $.ajax({
+                type: 'POST',
+                url: '/veterinariosDesocupados',
+                success: function (vet) {
+                    vet.forEach(function(valor,indice){
+                        $('#listaLibres').append('<li class="collection-item">' + valor.name + '</li>');
+                    });
+                },
+                error: function () {
+                    $('#listaLibres').append('<li class="collection-item">Todos los veterniarios atienden a un paciente en este momento</li>');
                 }
             });
         }
         $(document).ready(function(){
+            libres();
+            llenar();
             window.setInterval(llenar, 50000);
-            $("#entrantes").paginationTdA({
-                elemPerPage: 5
-            });
+            window.setInterval(libres, 10000);
             $(document).on('click','#show', function(e){
                 var id = this.getAttribute('valid')
                 $.get("Consulta/"+id ,function(c){
