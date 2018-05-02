@@ -45,15 +45,30 @@
         <div class="nav-wrapper teal lighten-2">
             <a href="#!" class="brand-logo">StarPets</a>
             <ul class="right hide-on-med-and-down">
-                <li>
-                    <a href="{{route('Consulta.index')}}"><i class="material-icons left">import_contacts</i>Consultas</a>
-                </li>
-                <li>
-                    <a href="{{route('Consulta.create')}}"><i class="material-icons left">add</i>Ingresar consultas</a>
-                </li>
-                <li>
-                    <a href="/home"><i class="material-icons left">home</i>Inicio</a>
-                </li>
+                @if(Auth::user()->roles()->first()->Name == "Veterinario")
+                    <li>
+                        <a href="{{route('Consulta.index')}}">
+                            <i class="material-icons left">import_contacts</i>Consulta</a>
+                    </li>
+                    <li>
+                        <a href="/home">
+                            <i class="material-icons left">home</i>Inicio</a>
+                    </li>
+                @endif 
+                @if(Auth::user()->roles()->first()->Name == "Secretaria")
+                    <li>
+                        <a href="{{route('Consulta.index')}}">
+                            <i class="material-icons left">import_contacts</i>Consultas</a>
+                    </li>
+                    <li>
+                        <a href="{{route('Consulta.create')}}">
+                            <i class="material-icons left">add</i>Ingresar consultas</a>
+                    </li>
+                    <li>
+                        <a href="/home">
+                            <i class="material-icons left">home</i>Inicio</a>
+                    </li>
+                @endif
                 <!-- Dropdown Trigger -->
                 <li>
                     <a class="dropdown-trigger" href="#!" data-target="dropdown1">{{Auth::user()->name}}

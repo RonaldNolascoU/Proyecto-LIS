@@ -24,7 +24,10 @@ class ConsultaController extends Controller
     {
         if(Auth::user()->hasRole('Veterinario')){
             
+            return view('Consulta.consulta');
+
         }elseif(Auth::user()->hasRole('Secretaria')){
+            
             $users = User::all();
             $vets = [];
             foreach ($users as $user) {
@@ -32,9 +35,8 @@ class ConsultaController extends Controller
                     array_push($vets,$user);
                 }
             }
-            $consultasIngresadas = Consulta::where('Estado',1)->orderBy('HoraLlegada','asc')->get();
-            $consultasTerminadas = Consulta::where('Estado',3)->orderBy('HoraLlegada','asc')->get();
-            return view('Consulta.listaConsultaSecretaria', compact('consultasIngresadas','consultasTerminadas','vets'));
+            return view('Consulta.listaConsultaSecretaria', compact('vets'));
+            
         }else{
             abort(401, 'Esta acción no está autorizada.');
         }
@@ -194,5 +196,19 @@ class ConsultaController extends Controller
             }
         }
         return $vet;
+    }
+
+    public function conseguirConsulta(Request $request){
+        if(Auth::user()->id == $request->id){
+            $consulta = Consulta::where(['Estado'=>2,'user_id'=>$request->id])->join('mascotas','mascota_id','mascotas.id')->join('tipo_mascotas','mascotas.tipo_id','tipo_mascotas.id')->first();
+            return $consulta;
+        }
+
+        abort(401, 'Manipulacion de acceso denegada.');
+    }
+
+    public function conseguirCliente(Request $request){
+        $cliente = Cliente::find($request->id);
+        return $cliente;
     }
 }

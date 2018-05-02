@@ -18,58 +18,6 @@
                             </div>
                             <div class="col xl10 offset-xl1">
                                 <table id="entrantes" class="highlight centered">
-                                    <!--<thead>
-                                        <tr>
-                                            <th>Mascota</th>
-                                            <th>Veterinario</th>
-                                            <th>Cambiar veterinario</th>
-                                            <th>Detalles</th>
-                                            <th>Eliminar</th>
-                                            <th>Pasar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if($consultasIngresadas->count()) @foreach($consultasIngresadas as $consulta)
-                                        <tr class="info">
-                                            <td>{{$consulta->mascota->NombreMascota}}</td>
-                                            <td>
-                                                {{$consulta->veterinario->name}}
-                                            </td>
-                                            <td>
-                                                <a href="#modal7" valid="{{$consulta->id}}" id="edit" title="Cambiar veterinario" class="modal-trigger btn-floating blue">
-                                                    <i class="material-icons">cached</i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a title="Detalles consulta" valid="{{$consulta->id}}" id="show" href="#modal6" class="modal-trigger btn-floating">
-                                                    <i class="material-icons">dehaze</i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a class="modal-trigger btn-floating red" valid="{{$consulta->id}}" id="delete">
-                                                    <i class="material-icons">delete</i>
-                                                </a>
-                                                <form id="{{$consulta->id}}" action="{{ action('ConsultaController@destroy', $consulta->id) }}" method="POST" style="display: none;">
-                                                    {{ csrf_field() }}
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <a title="Pasar consulta" valid="{{$consulta->id}}" id="next" class="btn-floating brown">
-                                                    <i class="material-icons">navigate_next</i>
-                                                </a>
-                                                <form id="pasar{{$consulta->id}}" action="/pasar" method="POST" style="display: none;">
-                                                    {{ csrf_field() }}
-                                                    <input name="id" type="hidden" value="{{$consulta->id}}">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @endforeach @else
-                                        <tr>
-                                            <td colspan="6">No hay registros</td>
-                                        </tr>
-                                        @endif
-                                    </tbody>-->
                                 </table>
                             </div>
                         </div>
@@ -81,22 +29,7 @@
                             </div>
                             <div class="col xl10 offset-xl1">
                                 <table class="highlight">
-                                    <thead>
-                                        <tr>
-                                            <th>Mascota</th>
-                                            <th>Veterinario</th>
-                                            <th>Hora</th>
-                                            <th>Editar</th>
-                                            <th>Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if($consultasTerminadas->count()) @else
-                                        <tr>
-                                            <td colspan="5" class="center-align">No hay registros</td>
-                                        </tr>
-                                        @endif
-                                    </tbody>
+                                    
                                 </table>
                             </div>
                         </div>

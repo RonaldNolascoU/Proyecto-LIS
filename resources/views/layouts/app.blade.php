@@ -29,6 +29,14 @@
                         <li><a href="/">Login de clientes</a></li>
                         <li><a href="{{route('login')}}">Login de usuarios</a></li>
                     @else 
+                        @if(Auth::user()->roles()->first()->Name == "Veterinario")
+                            <li>
+                                <a href="{{route('Consulta.index')}}"><i class="material-icons left">import_contacts</i>Consulta</a>
+                            </li>
+                            <li>
+                                <a href="/home"><i class="material-icons left">home</i>Inicio</a>
+                            </li>
+                        @endif
                         @if(Auth::user()->roles()->first()->Name == "Secretaria")
                             <li>
                                 <a href="{{route('Consulta.index')}}"><i class="material-icons left">import_contacts</i>Consultas</a>

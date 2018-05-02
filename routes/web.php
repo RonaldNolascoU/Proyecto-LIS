@@ -63,4 +63,8 @@ Route::post('/conseguirVeterinario','ConsultaController@conseguirVeterinario');
 
 Route::post('/veterinariosDesocupados', 'ConsultaController@veterinarios');
 
+Route::post('/conseguirConsulta', 'ConsultaController@conseguirConsulta');
+
+Route::post('/conseguirCliente', 'ConsultaController@conseguirCliente');
+
 //-----------------------------------------------------
