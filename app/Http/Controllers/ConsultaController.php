@@ -221,4 +221,9 @@ class ConsultaController extends Controller
         ]);
         return 'OK';
     }
+
+    public function llenarPago(){
+        $consultas = Consulta::where(['Estado'=>3])->join('mascotas','consultas.mascota_id','=','mascotas.id')->join('clientes','mascotas.cliente_id','=','clientes.id')->get();
+        return $consultas;
+    }
 }

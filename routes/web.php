@@ -67,6 +67,8 @@ Route::post('/clienteMascota', 'ClienteController@ajax');
 
 Route::post('/listaEntrantes','ConsultaController@llenarEntrantes');
 
+Route::post('/listaPago','ConsultaController@llenarPago');
+
 Route::post('/conseguirMascota','ConsultaController@conseguirMascota');
 
 Route::post('/conseguirVeterinario','ConsultaController@conseguirVeterinario');
@@ -84,5 +86,7 @@ Route::post('/llenarDiagnosticos','DiagnosticoController@llenarDiagnostico');
 Route::post('/llenarServicios','ServicioController@llenarServicios');
 
 Route::post('/finalizar', 'ConsultaController@finalizar');
+
+Route::post('/costo', 'ConsultaController@costo');
 
 //-----------------------------------------------------

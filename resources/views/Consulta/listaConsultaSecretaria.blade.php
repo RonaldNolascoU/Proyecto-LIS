@@ -22,13 +22,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col xl6">
+                    <div class="col xl12">
                         <div class="row">
                             <div class="col xl12">
                                 <h4 class="center-align teal-text">Consultas por pagar</h4>
                             </div>
                             <div class="col xl10 offset-xl1">
-                                <table class="highlight">
+                                <table id="pago" class="highlight">
                                     
                                 </table>
                             </div>
@@ -113,6 +113,32 @@
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>
         </div>
     </div>
+    <div id="modal9" class="modal">
+        <div class="modal-content">
+            <h4 class="teal-text">Detalles de pago</h4>
+            <div class="container">
+                <div class="row">
+                    <input type="hidden" name="pago_id" id="pago_id">
+                    <input type="hidden" name="costo" id="costo">
+                    <div class="col xl12">
+                        <span id="PagoNombre"></span>
+                    </div>
+                    <div class="col xl12">
+                        <span id="PagoFecha"></span>
+                    </div>
+                    <div class="col xl12">
+                        <span id="PagoVeterinario"></span>
+                    </div>
+                    <div class="col xl6">
+                        <span id="Costo"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cerrar</a>
+        </div>
+    </div>
     <script type="text/javascript" src="../../js/paginar.js"></script>
     <script type="text/javascript">
         $.ajaxSetup({
@@ -120,13 +146,13 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         function mascota(id){
             $.ajax({
                 type: 'POST',
                 url: '/conseguirMascota',
                 data: { id: id },
                 success: function (mascota) {
-                    console.log(mascota)
                     document.getElementById('mascota'+id).innerHTML = mascota.NombreMascota;
                 },
                 error: function () {
@@ -134,13 +160,13 @@
                 }
             });
         }
+
         function veterinario(id){
             $.ajax({
                 type: 'POST',
                 url: '/conseguirVeterinario',
                 data: { id: id },
                 success: function (user) {
-                    console.log(user)
                     var clase = document.getElementsByClassName('veterinario'+id);
                     for(var i = 0; i<clase.length;i++){
                         clase[i].innerHTML = user.name
@@ -151,6 +177,7 @@
                 }
             });
         }
+
         function llenar(){
             $('.info').remove();
             document.getElementById("entrantes").innerHTML = "<thead><tr><th>Mascota</th><th>Veterinario</th><th>Cambiar veterinario</th><th>Detalles</th><th>Eliminar</th><th>Pasar</th></tr></thead><tbody>";
@@ -182,6 +209,7 @@
                 }
             });
         }
+
         function libres(){
             $('#listaLibres').empty();
             $('#listaLibres').append('<li class="collection-header teal-text"><h4 class="center-align">Veterinarios desocupados</h4></li>');
@@ -198,11 +226,64 @@
                 }
             });
         }
+
+        function pago(){
+            $('.infoPago').remove();
+            var contenido = '<thead><tr><th>Dueño</th><th>Mascota</th><th>Veterinario</th><th>Detalles</th><th>Pagar</th></tr></thead><tbody>';
+            $.ajax({
+                type: 'POST',
+                url: '/listaPago',
+                success: function (consultas) {
+                    if(consultas.length){
+                        consultas.forEach(function(valor,indice){
+                            contenido += '<tr class="infoPago"><td>' + valor.PrimerNombre + ' ' + valor.PrimerApellido + '</td><td>' + valor.NombreMascota + '</td><td class="veterinario'+ valor.user_id + '"></td><td><a title="Detalles consulta" valid="'+ valor.id +'" id="show" href="#modal6" class="modal-trigger btn-floating"><i class="material-icons">dehaze</i></a></td><td><a title="Pagar consulta" valid="' + valor.id + '" id="pagar" href="#modal9" class="modal-trigger btn-floating brown"><i class="material-icons">monetization_on</i></a></td></tr>'
+                            veterinario(valor.user_id);
+                        });
+                        contenido += '</tbody>';
+                        $('#pago').append(contenido);
+                    }else{
+                        document.getElementById("pago").innerHTML = contenido;
+                        $('#pago').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
+                        document.getElementById("pago").innerHTML += "</tbody>"
+                        $("#pago").paginationTdA({
+                            elemPerPage: 5
+                        });
+                    }
+                    $("#pago").paginationTdA({
+                        elemPerPage: 5
+                    });
+                },
+                error: function () {
+                    $('#pago').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
+                    document.getElementById("entrantes").innerHTML += "</tbody>"
+                    $("#pago").paginationTdA({
+                        elemPerPage: 5
+                    });
+                }
+            });
+        }
+
+        function conseguirCosto(id){
+            $.ajax({
+                type: 'POST',
+                url: '/costo',
+                data: {id: id},
+                success: function(costo){
+                    console.log(costo);
+                },
+                error: function(){
+
+                }
+            });
+        }
+
         $(document).ready(function(){
             libres();
             llenar();
+            pago();
             window.setInterval(llenar, 50000);
             window.setInterval(libres, 10000);
+
             $(document).on('click','#show', function(e){
                 var id = this.getAttribute('valid')
                 $.get("Consulta/"+id ,function(c){
@@ -213,6 +294,7 @@
                     document.getElementById("DetalleVeterinario").innerHTML = "<b>Nombre del veterinario: </b>"+c.veterinario[0].name;
                 });
             });
+            
             $(document).on('click','#edit', function(e){
                 var id = this.getAttribute('valid')
                 $.get("Consulta/"+id+"/edit" ,function(c){
@@ -225,16 +307,29 @@
                     $('#Veterianrio').formSelect();
                 });
             });
+
             $(document).on('click','#delete', function(e){
                 var id = this.getAttribute('valid')
                 if(confirm('Seguro desea borrar esta consulta')){
                     $('#'+id).submit();
                 }
             })
+
             $(document).on('click','#next',function(){
                 var id = this.getAttribute('valid')
                 $('#pasar'+id).submit();
             })
+
+            $(document).on('click','#pagar',function(){
+                var id = this.getAttribute('valid');
+                $.get("Consulta/"+id ,function(c){
+                    document.getElementById("PagoNombre").innerHTML = "<b>Nombre de la mascota: </b>"+c.mascota[0].NombreMascota;
+                    document.getElementById("PagoFecha").innerHTML = "<b>Fecha y hora: </b>"+c.consulta[0].FechaConsulta+", "+c.consulta[0].HoraLlegada;
+                    document.getElementById("PagoVeterinario").innerHTML = "<b>Nombre del veterinario: </b>"+c.veterinario[0].name;
+                    conseguirCosto(id);
+                });
+            })
+
         });
     </script>
 @endsection
