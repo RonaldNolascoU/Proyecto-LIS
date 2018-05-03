@@ -51,6 +51,10 @@ Route::post('/pasar','ConsultaController@pasar');
 
 Route::resource('Sintoma','SintomaController');
 
+Route::resource('Diagnostico','DiagnosticoController');
+
+Route::resource('Medicamento','MedicamentoController');
+
 //-----------------------------------------------------
 
 //Rutas AJAX
@@ -68,5 +72,9 @@ Route::post('/veterinariosDesocupados', 'ConsultaController@veterinarios');
 Route::post('/conseguirConsulta', 'ConsultaController@conseguirConsulta');
 
 Route::post('/conseguirCliente', 'ConsultaController@conseguirCliente');
+
+Route::post('/llenarSintomas','SintomaController@llenarSintomas');
+
+Route::post('/llenarDiagnosticos','DiagnosticoController@llenarDiagnostico');
 
 //-----------------------------------------------------

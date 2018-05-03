@@ -43,3 +43,8 @@ body{
     float: left;
     border-bottom:1px solid #e0e0e0
 }
+
+#listaSintomas{
+    max-height: 150px;
+    overflow-y: auto;
+}

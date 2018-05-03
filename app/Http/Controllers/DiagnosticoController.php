@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Diagnostico;
+use App\Medicamento;
 
 class DiagnosticoController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +39,15 @@ class DiagnosticoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            Diagnostico::create([
+                'DescripcionDiagnostico' => $request->diagnostico,
+                'consulta_id' => $request->id,
+            ]);
+            return 'OK';
+        }catch(QueryException $ex){
+            return 'NO';
+        }
     }
 
     /**
@@ -79,6 +92,23 @@ class DiagnosticoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $diagnostico = Diagnostico::find($id);
+            $diagnostico->delete();
+            return 'OK';
+        }catch(QueryException $ex){
+            return 'NO';
+        }
+    }
+
+    public function llenarDiagnostico(Request $request){
+        $listaMedicamentos = [];
+        $listaDiagnosticos = Diagnostico::where(['consulta_id'=>$request->id])->get();
+        foreach($listaDiagnosticos as $diagnostico){
+            $medicamentos = Medicamento::where(['diagnostico_id'=>$diagnostico->id])->get();
+            array_push($listaMedicamentos,$medicamentos);
+        }
+        $diagnosticos =['Diagnosticos'=>$listaDiagnosticos, 'Medicamentos'=>$listaMedicamentos];
+        return $diagnosticos;
     }
 }

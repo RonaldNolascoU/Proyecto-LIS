@@ -7,6 +7,7 @@ use App\Consulta;
 use App\Cliente;
 use App\Mascota;
 use App\User;
+use App\TipoMedicamento;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 
@@ -24,7 +25,8 @@ class ConsultaController extends Controller
     {
         if(Auth::user()->hasRole('Veterinario')){
             
-            return view('Consulta.consulta');
+            $tipos = TipoMedicamento::all();
+            return view('Consulta.consulta', compact('tipos'));
 
         }elseif(Auth::user()->hasRole('Secretaria')){
             
