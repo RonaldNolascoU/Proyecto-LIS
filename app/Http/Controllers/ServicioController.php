@@ -92,6 +92,16 @@ class ServicioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            Servicio::find($id)->delete();
+            return 'OK';
+        }catch(QueryException $ex){
+            return 'NO';
+        }
+    }
+
+    public function llenarServicios(Request $request){
+        $servicios = Servicio::where(['consulta_id'=>$request->id])->get();
+        return $servicios;
     }
 }

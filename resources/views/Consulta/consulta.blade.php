@@ -25,20 +25,29 @@
                             <input type="hidden" name="id" id="id" readonly>
                             <div class="col xl3">
                                 <div class="row">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img id="mascota">
-                                            <span class="card-title" id="nombre"></span>
+                                    <div class="col xl12">
+                                        <div class="card">
+                                            <div class="card-image">
+                                                <img id="mascota">
+                                                <span class="card-title" id="nombre"></span>
+                                            </div>
+                                            <div class="card-content">
+                                                <p><b>Edad: </b><span id="edad"></span> años</p>
+                                                <p><b>Tipo: </b><span id="tipo"></span></p>
+                                                <p><b>Peso: </b><span id="peso"></span> libras</p>
+                                                <p><b>Altura: </b><span id="altura"></span> cm</p>
+                                            </div>
+                                            <div class="card-action">
+                                                <p><b>Dueño: </b><span id="cliente"></span></p>
+                                            </div>
                                         </div>
-                                        <div class="card-content">
-                                            <p><b>Edad: </b><span id="edad"></span> años</p>
-                                            <p><b>Tipo: </b><span id="tipo"></span></p>
-                                            <p><b>Peso: </b><span id="peso"></span> libras</p>
-                                            <p><b>Altura: </b><span id="altura"></span> cm</p>
-                                        </div>
-                                        <div class="card-action">
-                                            <p><b>Dueño: </b><span id="cliente"></span></p>
-                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col xl12 center-align">
+                                        <button class="btn waves-effect waves-light blue" id="finalizar" type="button" name="action">Finalizar
+                                            <i class="material-icons right">check</i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +132,7 @@
                         </div>
                     </div>
                     <div class="col xl12" id="error">
-                        <h1>No tiene consultas por atender</h1>
+                        <h1 class="center-align">No tiene consultas por atender</h1>
                     </div>
                 </div>
             </div>
@@ -213,6 +222,7 @@
                         $('#fecha').text(actual.toLocaleDateString() + ', ' + consulta.HoraLlegada);
                         llenarSintomas();
                         llenarDiagnostico();
+                        llenarServicio();
                         $('#info').show();
                         $('#error').hide();
                     }else{
@@ -280,6 +290,27 @@
             })
         }
 
+        function llenarServicio(){
+            var id = $('#id').val();
+            $('#listaServicios').empty();
+            $.ajax({
+                type: 'POST',
+                url: '/llenarServicios',
+                data: {id: id},
+                success: function (servicios) {
+                    $('#listaServicios').append('<li class="collection-header teal-text"><h6 class="center-align">Servicios</h6></li>');
+                    servicios.forEach(function(valor,indice){
+                        $('#listaServicios').append('<li class="c-item"><div class="valor-li"><span>'+ valor.DescripcionServicio +', costo: ' + valor.Precio + '</span></div><div valid="' + valor.id + '" class="btn-li eliminarServicio"><a class="btn-floating waves-effect waves-light red btn-small"><i class="material-icons tiny">remove</i></a></div></li>');
+                    });
+                    $('#Servicio').val("");
+                    $('#Precio').val("");
+                    $('#Servicio').focus();
+                },
+                error: function(){
+                }
+            })
+        }
+
         function verificar(){
             var id = $('#id').val();
             if(id == ""){
@@ -294,6 +325,20 @@
             $(document).on('click','#recargar',function(){
                 console.log('si')
                 verificar();
+            });
+
+            $(document).on('click','#finalizar',function(){
+                var id = $('#id').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/finalizar',
+                    data: {id: id},
+                    success: function (respuesta) {
+                        $('#id').val("");
+                    },
+                    error: function(){
+                    }
+                })
             });
 
             $(document).on('click','#ingresarSintoma',function(){
@@ -430,6 +475,46 @@
                 }
             })
             
+            $(document).on('click','#ingresarServicio',function(){
+                var id = $('#id').val();
+                var servicio = $('#Servicio').val();
+                var precio = $('#Precio').val();
+                servicio = servicio.trim();
+                precio = precio.trim();
+                if(servicio != "" && precio != "" && $.isNumeric(precio)){
+                    $.ajax({
+                        type: 'POST',
+                        url: '../../Servicio',
+                        data: { id: id, servicio: servicio, precio: precio },
+                        success: function (respuesta) {
+                            llenarServicio();
+                        },
+                        error: function(){
+
+                        }
+                    })
+                }else{
+                    M.toast({html: "Verifique lo ingresado"})
+                    $('#Servicio').focus();
+                }
+            })
+
+            $(document).on('click','.eliminarServicio', function(){
+                var id = this.getAttribute('valid');
+                if(confirm('Seguro desea eliminar este sintoma')){
+                    $.ajax({
+                        type: 'POST',
+                        url: '../../Servicio/'+id,
+                        data: { _method: 'DELETE' },
+                        success: function (respuesta) {
+                            llenarServicio();
+                        },
+                        error: function () {
+                            
+                        }
+                    })
+                }
+            })
         });
     </script>
 @endsection

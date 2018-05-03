@@ -213,4 +213,12 @@ class ConsultaController extends Controller
         $cliente = Cliente::find($request->id);
         return $cliente;
     }
+
+    public function finalizar(Request $request){
+        $consulta = Consulta::find($request->id);
+        $consulta->update([
+            'Estado' => 3,
+        ]);
+        return 'OK';
+    }
 }
