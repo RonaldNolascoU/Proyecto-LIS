@@ -34,6 +34,7 @@
         </script>
     @endif
     <ul id="dropdown1" class="dropdown-content">
+        <li></li>
         <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
         </li>
