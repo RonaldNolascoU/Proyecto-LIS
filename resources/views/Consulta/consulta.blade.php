@@ -71,6 +71,32 @@
                                         </div>
                                         <div class="row">
                                             <div class="col xl12">
+                                                <div class="col xl6">
+                                                    <h6 class="teal-text">Agregar servicio brindado</h6>
+                                                    <div class="input-field col xl12">
+                                                        <i class="material-icons prefix">announcement</i>
+                                                        <input id="Servicio" name="Servicio" type="text" class="validate">
+                                                        <label for="Servicio">Servicio</label>
+                                                    </div>
+                                                    <div class="input-field col xl12">
+                                                            <i class="material-icons prefix">monetization_on</i>
+                                                            <input id="Precio" name="Precio" type="text" class="validate">
+                                                            <label for="Precio">Precio</label>
+                                                        </div>
+                                                    <div class="col xl8 offset-xl2">
+                                                        <button class="btn waves-effect waves-light blue" id="ingresarServicio" type="button" name="action">Agregar
+                                                            <i class="material-icons right">add</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col xl6">
+                                                    <ul class="collection with-header" id="listaServicios">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col xl12">
                                                 <div class="col xl6 offset-xl3">
                                                     <h6 class="teal-text">Agregar Diagnostico</h6>
                                                     <div class="input-field col xl12">
@@ -231,10 +257,12 @@
                 url: '/llenarDiagnosticos',
                 data: {id: id},
                 success: function (diagnosticos) {
+                    var tabs = 0;
                     diagnosticos.Diagnosticos.forEach(function(valor,indice){
                         var card = '<div class="col xl6"><div class="card"><div class="card-image teal white-text center-align"><i class="material-icons large">local_hospital</i><a valid="' + valor.id + '" class="btn-floating halfway-fab waves-effect waves-light red eliminarDiagnostico"><i class="material-icons">remove</i></a></div><div class="card-content"><p id="diagnostico">' + valor.DescripcionDiagnostico + '</p></div><div class="card-tabs"><ul class="tabs tabs-fixed-width teal-text">';
                         diagnosticos.Medicamentos[indice].forEach(function(medicamento,i){
                             card += '<li class="tab"><a href="#medicamento'+ medicamento.id +'">Medicamento</a></li>';
+                            tabs++;
                         })
                         card += '</ul></div><div class="card-content grey lighten-4">';
                         diagnosticos.Medicamentos[indice].forEach(function(medicamento,i){
@@ -243,7 +271,9 @@
                         card += '</div><div class="card-action"><a id="mostrarModal" valid="' + valor.id + '" class="modal-trigger" href="#modal8">Ingresar medicamento</a></div></div></div>'
                         $('#diagnosticos').append(card);
                     });
-                    $('.tabs').tabs();
+                    if(tabs != 0){
+                        $('.tabs').tabs();
+                    }
                 },
                 error: function(){
                 }

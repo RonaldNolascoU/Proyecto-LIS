@@ -48,3 +48,12 @@ body{
     max-height: 150px;
     overflow-y: auto;
 }
+
+#diagnosticos{
+    max-height: 445px;
+    overflow-y: auto;
+}
+
+.card{
+    height: 365px !important;
+}

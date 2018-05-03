@@ -16,7 +16,7 @@ class CreateMedicamentosTable extends Migration
         Schema::create('medicamentos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('NombreMedicamento', 30);
-            $table->string('Medida', 30);
+            $table->string('Medida', 100);
             $table->unsignedInteger('diagnostico_id');
             $table->unsignedInteger('tipo_medicamento_id');
             $table->foreign('diagnostico_id')->references('id')->on('diagnosticos')->onDelete('cascade');
