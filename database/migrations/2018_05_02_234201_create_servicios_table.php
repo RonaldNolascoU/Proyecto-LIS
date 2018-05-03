@@ -15,7 +15,7 @@ class CreateServiciosTable extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('DescripcionSintoma');
+            $table->text('DescripcionServicio');
             $table->decimal('Precio', 8,2);
             $table->unsignedInteger('consulta_id');
             $table->foreign('consulta_id')->references('id')->on('consultas')->onDelete('cascade');
