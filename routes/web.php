@@ -59,6 +59,8 @@ Route::resource('Medicamento','MedicamentoController');
 
 Route::resource('Servicio','ServicioController');
 
+Route::get('/pdf','ConsultaController@pdf');
+
 //-----------------------------------------------------
 
 //Rutas AJAX

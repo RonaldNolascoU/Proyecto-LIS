@@ -246,6 +246,11 @@ class ConsultaController extends Controller
         return 'OK';
     }
 
+    public function pdf(){
+        $consulta = Consulta::find(1);
+        return view('Consulta.pdf', compact('consulta'));
+    }
+
     //Funciones privadas
     private function calcularCosto($id){
         $costo = 25;

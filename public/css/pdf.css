@@ -1,0 +1,49 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Open-Sans";
+}
+
+
+header{
+    background-image: url('../img/fondo-header.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+h1{
+    text-align: center;
+    color: white;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 500%
+}
+
+h2{
+    text-align: center;
+    font-size: 200%
+}
+
+h3{
+    text-align: center;
+    font-size: 200%
+}
+
+table{
+    margin: auto;
+    width: 80%;
+}
+
+td{
+    padding: 1%;
+}
+
+.left{
+    text-align: right;
+}
+
+@font-face {
+    font-family: "Open-Sans";
+    src: url(../fonts/OpenSans-Regular.ttf);
+}

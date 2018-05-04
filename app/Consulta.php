@@ -23,4 +23,8 @@ class Consulta extends Model
     public function servicios(){
         return $this->hasMany('App\Servicio','consulta_id');
     }
+
+    public function pago(){
+        return $this->hasOne('App\Pago','consulta_id');
+    }
 }
