@@ -15,4 +15,12 @@ class Consulta extends Model
     public function veterinario(){
         return $this->belongsTo('App\User','user_id');
     }
+
+    public function diagnosticos(){
+        return $this->hasMany('App\Diagnostico','consulta_id');
+    }
+
+    public function servicios(){
+        return $this->hasMany('App\Servicio','consulta_id');
+    }
 }

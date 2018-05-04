@@ -119,7 +119,7 @@
             <div class="container">
                 <div class="row">
                     <input type="hidden" name="pago_id" id="pago_id">
-                    <input type="hidden" name="costo" id="costo">
+                    <input type="hidden" name="consulta_costo" id="consulta_costo">
                     <div class="col xl12">
                         <span id="PagoNombre"></span>
                     </div>
@@ -129,8 +129,14 @@
                     <div class="col xl12">
                         <span id="PagoVeterinario"></span>
                     </div>
-                    <div class="col xl6">
+                    <div class="col xl12">
                         <span id="Costo"></span>
+                    </div>
+                    <div class="col xl12 center-align">
+                        <br>
+                        <button class="btn waves-effect waves-light blue" id="btnPagar" type="button" name="action">Cancelar consulta
+                            <i class="material-icons right">check</i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -270,6 +276,8 @@
                 data: {id: id},
                 success: function(costo){
                     console.log(costo);
+                    $('#Costo').append('<b>Total a cancelar:</b> $' + costo);
+                    $('#consulta_costo').val(costo);
                 },
                 error: function(){
 
@@ -326,10 +334,27 @@
                     document.getElementById("PagoNombre").innerHTML = "<b>Nombre de la mascota: </b>"+c.mascota[0].NombreMascota;
                     document.getElementById("PagoFecha").innerHTML = "<b>Fecha y hora: </b>"+c.consulta[0].FechaConsulta+", "+c.consulta[0].HoraLlegada;
                     document.getElementById("PagoVeterinario").innerHTML = "<b>Nombre del veterinario: </b>"+c.veterinario[0].name;
+                    $('#pago_id').val(id);
                     conseguirCosto(id);
                 });
             })
+            
+            $(document).on('click','#btnPagar',function(){
+                var id = $('#pago_id').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/pagar',
+                    data: {id:id},
+                    success: function(respuesta){
+                        $('#modal9').modal('close');
+                        llenar();
+                        pago();
+                    },
+                    error: function(){
 
+                    }
+                })
+            });
         });
     </script>
 @endsection

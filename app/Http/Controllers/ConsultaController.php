@@ -8,6 +8,7 @@ use App\Cliente;
 use App\Mascota;
 use App\User;
 use App\TipoMedicamento;
+use App\Pago;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 
@@ -225,5 +226,33 @@ class ConsultaController extends Controller
     public function llenarPago(){
         $consultas = Consulta::where(['Estado'=>3])->join('mascotas','consultas.mascota_id','=','mascotas.id')->join('clientes','mascotas.cliente_id','=','clientes.id')->get();
         return $consultas;
+    }
+
+    public function costo(Request $request){
+        $costo = $this->calcularCosto($request->id);
+        return $costo;
+    }
+
+    public function pagar(Request $request){
+        $costo = $this->calcularCosto($request->id);
+        $consulta = Consulta::find($request->id);
+        Pago::create([
+            'Monto'=>$costo,
+            'consulta_id'=>$request->id,
+        ]);
+        $consulta->update([
+            'Estado'=>4
+        ]);
+        return 'OK';
+    }
+
+    //Funciones privadas
+    private function calcularCosto($id){
+        $costo = 25;
+        $consulta = Consulta::find($id);
+        foreach($consulta->servicios as $servicio){
+            $costo += $servicio->Precio;
+        }
+        return $costo;
     }
 }

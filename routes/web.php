@@ -89,4 +89,6 @@ Route::post('/finalizar', 'ConsultaController@finalizar');
 
 Route::post('/costo', 'ConsultaController@costo');
 
+Route::post('/pagar', 'ConsultaController@pagar');
+
 //-----------------------------------------------------
