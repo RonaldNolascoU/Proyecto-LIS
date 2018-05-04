@@ -11,6 +11,7 @@ use App\TipoMedicamento;
 use App\Pago;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ConsultaController extends Controller
 {
@@ -246,9 +247,11 @@ class ConsultaController extends Controller
         return 'OK';
     }
 
-    public function pdf(){
-        $consulta = Consulta::find(1);
-        return view('Consulta.pdf', compact('consulta'));
+    public function pdf(Request $request){
+        $consulta = Consulta::find($request->id);
+        $pdf = PDF::loadView('Consulta.pdf', compact('consulta'));
+        $nombre = 'Factura_consulta'.$request->id;
+        return $pdf->download($nombre.'.pdf');
     }
 
     //Funciones privadas
