@@ -247,11 +247,11 @@ class ConsultaController extends Controller
         return 'OK';
     }
 
-    public function pdf(Request $request){
-        $consulta = Consulta::find($request->id);
+    public function pdf($id){
+        $consulta = Consulta::find($id);
         $pdf = PDF::loadView('Consulta.pdf', compact('consulta'));
-        $nombre = 'Factura_consulta'.$request->id;
-        return $pdf->download($nombre.'.pdf');
+        $nombre = 'Factura_consulta'.$id.'.pdf';
+        return $pdf->download($nombre);
     }
 
     //Funciones privadas

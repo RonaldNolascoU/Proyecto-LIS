@@ -61,7 +61,7 @@
                 </tr>
             @endforeach
             <tr>
-                <td class="left" colspan="2"><b>Total: </b> {{$consulta->pago->Monto}}</td>
+                <td class="left" colspan="2"><b>Total: </b> ${{$consulta->pago->Monto}}</td>
             </tr>
         </tbody>
     </table>

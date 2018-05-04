@@ -1,7 +1,6 @@
 *{
     padding: 0;
     margin: 0;
-    font-family: "Open-Sans";
 }
 
 
@@ -43,7 +42,3 @@ td{
     text-align: right;
 }
 
-@font-face {
-    font-family: "Open-Sans";
-    src: url(../fonts/OpenSans-Regular.ttf);
-}

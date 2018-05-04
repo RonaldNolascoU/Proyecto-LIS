@@ -59,7 +59,7 @@ Route::resource('Medicamento','MedicamentoController');
 
 Route::resource('Servicio','ServicioController');
 
-Route::get('/pdf','ConsultaController@pdf');
+Route::get('/pdf/{id}','ConsultaController@pdf');
 
 //-----------------------------------------------------
 

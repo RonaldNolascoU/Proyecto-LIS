@@ -346,6 +346,7 @@
                     url: '/pagar',
                     data: {id:id},
                     success: function(respuesta){
+                        window.location.assign('/pdf/'+id);
                         $('#modal9').modal('close');
                         llenar();
                         pago();
