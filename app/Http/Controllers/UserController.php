@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \Illuminate\Database\QueryException;
 use App\User;
+use App\Role;
 
 class UserController extends Controller
 {
@@ -29,7 +31,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::All();
+        return view('User.create', compact('roles'));
     }
 
     /**
@@ -40,7 +43,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+
+            $password = str_random(8);
+            $user = User::create([
+                'name'=>$request->Nombre,
+                'email'=>$request->Correo,
+                'estado'=>1,
+                'password'=>bcrypt($password),
+            ]);
+            $user->roles()->attach(Role::find($request->Tipo));
+
+            $success = "Usuario ingresado exitosamente";
+            return redirect()->route('User.index')->with('success',$success);
+
+        }catch(QueryException $ex){
+            $prb = "Correo electronico ya implementado";
+            return redirect()->route('User.create')->with('prb',$prb);
+        }
     }
 
     /**
@@ -74,7 +94,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $user = User::find($id);
+
+            $user->update([
+                'estado' => 2,
+            ]);
+
+            $success = "Usuario degradado exitosamente";
+            return redirect()->route('User.index')->with('success',$success);
+        }catch(Exception $ex){
+            $prb = "Ocurrio un problema inesperado";
+            return redirect()->route('User.index')->with('prb',$prb);
+        }
     }
 
     /**

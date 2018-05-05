@@ -11,6 +11,7 @@ use App\TipoMedicamento;
 use App\Pago;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
+use \Illuminate\Database\QueryException;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class ConsultaController extends Controller
