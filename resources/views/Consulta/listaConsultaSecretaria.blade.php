@@ -257,14 +257,14 @@
                         paginarPago()
                     }else{
                         document.getElementById("pago").innerHTML = contenido;
-                        $('#pago').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
+                        $('#pago').append("<tr class='info'><td colspan='6' class='center-align'>No hay registros</td></tr>");
                         document.getElementById("pago").innerHTML += "</tbody>";
                         paginarPago()
                     }
                     
                 },
                 error: function () {
-                    $('#pago').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
+                    $('#pago').append("<tr class='info'><td colspan='6' class='center-align'>No hay registros</td></tr>");
                     document.getElementById("entrantes").innerHTML += "</tbody>";
                     paginarPago();
                 }
