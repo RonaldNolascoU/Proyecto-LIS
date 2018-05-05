@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Mascota;
 use App\Cliente;
 use App\TipoMascota;
+use App\Consulta;
 
 class MascotaController extends Controller
 {
@@ -156,5 +158,12 @@ class MascotaController extends Controller
     public function listaConsultas(){
         $cliente = Cliente::find(Session::get('id'));
         return view('Mascota.consultas', compact('cliente'));
+    }
+
+    public function pdf($id){
+        $consulta = Consulta::find($id);
+        $pdf = PDF::loadView('Consulta.pdf', compact('consulta'));
+        $nombre = 'Factura_consulta'.$id.'.pdf';
+        return $pdf->download($nombre);
     }
 }

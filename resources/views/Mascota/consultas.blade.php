@@ -21,21 +21,23 @@
                 <div class="row">
                     @foreach($cliente->mascotas as $mascota)
                         <h3>Consultas de: {{$mascota->NombreMascota}}</h3>
-                        <table >
+                        <table>
                             <thead>
                                 <tr>
-                                    <th>Veterinario</th>
-                                    <th>Dia</th>
-                                    <th>Detalles</th>
+                                    <th class="center-align">Veterinario</th>
+                                    <th class="center-align">Dia</th>
+                                    <th class="center-align">Detalles</th>
                                 </tr>
                             </thead>
                             <tbody id="{{$mascota->id}}">
                                 @foreach($mascota->consultas as $consulta)
                                     @if($consulta->Estado == 4)
                                         <tr>
-                                            <td>{{$consulta->veterinario->name}}</td>
-                                            <td>{{$consulta->FechaConsulta}}</td>
-                                            <td><input type="button" value=""></td>
+                                            <td class="center-align">{{$consulta->veterinario->name}}</td>
+                                            <td class="center-align">{{$consulta->FechaConsulta}}</td>
+                                            <td class="center-align">
+                                                <a title="Detalles de consulta" href="/detallesConsulta/{{$consulta->id}}" class="modal-trigger btn-floating"><i class="material-icons">check</i></a>
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach

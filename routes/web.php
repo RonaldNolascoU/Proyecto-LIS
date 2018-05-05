@@ -41,6 +41,8 @@ Route::post('Mascota/imagen','MascotaController@imagen')->middleware('login');
 
 Route::get('/listaConsultas', 'MascotaController@listaConsultas');
 
+Route::get('/detallesConsulta/{id}','MascotaController@pdf');
+
 //-----------------------------------------------------
 
 //Rutas de usuarios
