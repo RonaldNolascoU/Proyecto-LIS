@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Sintoma;
+use App\User;
 
-class SintomaController extends Controller
+class UserController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
@@ -18,7 +18,8 @@ class SintomaController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('User.index',compact('users'));
     }
 
     /**
@@ -39,16 +40,7 @@ class SintomaController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            Sintoma::create([
-                'DescripcionSintoma' => $request->sintoma,
-                'consulta_id' => $request->id,
-            ]);
-            $sintomas = Sintoma::where(['consulta_id'=>$request->id])->get();
-            return $sintomas;
-        }catch(QueryException $ex){
-            return 'Problema';
-        }
+        //
     }
 
     /**
@@ -93,19 +85,6 @@ class SintomaController extends Controller
      */
     public function destroy($id)
     {
-        try{
-            $sintoma = Sintoma::find($id);
-            $consulta = $sintoma->consulta_id;
-            $sintoma->delete();
-            $sintomas = Sintoma::where(['consulta_id'=>$consulta])->get();
-            return $sintomas;
-        }catch(QueryException $ex){
-            return 'Problema';
-        }
-    }
-
-    public function llenarSintomas(Request $request){
-        $sintomas = Sintoma::where(['consulta_id'=>$request->id])->get();
-        return $sintomas;
+        //
     }
 }

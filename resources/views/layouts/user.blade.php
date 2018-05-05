@@ -70,6 +70,24 @@
                             <i class="material-icons left">home</i>Inicio</a>
                     </li>
                 @endif
+                 @if(Auth::user()->roles()->first()->Name == "Administrador")
+                    <li>
+                        <a href="{{route('User.index')}}">
+                            <i class="material-icons left">local_hospital</i>Tipos de medicamentos</a>
+                    </li>
+                    <li>
+                        <a href="{{route('User.index')}}">
+                            <i class="material-icons left">pets</i>Tipos de mascotas</a>
+                    </li>
+                    <li>
+                        <a href="{{route('User.index')}}">
+                            <i class="material-icons left">perm_identity</i>Lista de usuarios</a>
+                    </li>
+                    <li>
+                        <a href="/home">
+                            <i class="material-icons left">home</i>Inicio</a>
+                    </li>
+                @endif
                 <!-- Dropdown Trigger -->
                 <li>
                     <a class="dropdown-trigger" href="#!" data-target="dropdown1">{{Auth::user()->name}}

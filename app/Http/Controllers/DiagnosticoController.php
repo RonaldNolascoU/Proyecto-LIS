@@ -10,6 +10,7 @@ class DiagnosticoController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
+        $this->middleware('estado');
     }
     /**
      * Display a listing of the resource.

@@ -67,6 +67,12 @@ Route::get('/pdf/{id}','ConsultaController@pdf');
 
 //-----------------------------------------------------
 
+//Rutas administrador
+
+Route::resource('User','UserController');
+
+//-----------------------------------------------------
+
 //Rutas AJAX
 
 Route::post('/clienteMascota', 'ClienteController@ajax');
