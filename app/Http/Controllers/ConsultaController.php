@@ -29,7 +29,7 @@ class ConsultaController extends Controller
     {
         if(Auth::user()->hasRole('Veterinario')){
             
-            $tipos = TipoMedicamento::all();
+            $tipos = TipoMedicamento::where(['Estado'=>1])->get();
             return view('Consulta.consulta', compact('tipos'));
 
         }elseif(Auth::user()->hasRole('Secretaria')){
@@ -206,7 +206,7 @@ class ConsultaController extends Controller
 
     public function conseguirConsulta(Request $request){
         if(Auth::user()->id == $request->id){
-            $consulta = Consulta::where(['Estado'=>2,'user_id'=>$request->id])->join('mascotas','mascota_id','mascotas.id')->join('tipo_mascotas','mascotas.tipo_id','tipo_mascotas.id')->select('consultas.id','consultas.Peso','consultas.Altura','consultas.HoraLlegada','mascotas.NombreMascota','mascotas.imagen','mascotas.cliente_id','mascotas.FechaNacimiento','tipo_mascotas.NombreTipo')->first();
+            $consulta = Consulta::where(['consultas.Estado'=>2,'user_id'=>$request->id])->join('mascotas','mascota_id','mascotas.id')->join('tipo_mascotas','mascotas.tipo_id','tipo_mascotas.id')->select('consultas.id','consultas.Peso','consultas.Altura','consultas.HoraLlegada','mascotas.NombreMascota','mascotas.imagen','mascotas.cliente_id','mascotas.FechaNacimiento','tipo_mascotas.NombreTipo')->first();
             return $consulta;
         }
 

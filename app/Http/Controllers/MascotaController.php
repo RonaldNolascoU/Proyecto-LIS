@@ -37,7 +37,7 @@ class MascotaController extends Controller
      */
     public function create()
     {
-        $tipos = TipoMascota::all();
+        $tipos = TipoMascota::where(['Estado'=>1])->get();
         $cliente = Cliente::find(Session::get('id'));
         return view('Mascota.create', compact('cliente','tipos'));
     }
