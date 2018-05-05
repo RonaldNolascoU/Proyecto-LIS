@@ -16,6 +16,7 @@ class CreateTipoMedicamentosTable extends Migration
         Schema::create('tipo_medicamentos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('TipoMedicamento', 30)->unique();
+            $table->integer('Estado');
             $table->timestamps();
         });
     }

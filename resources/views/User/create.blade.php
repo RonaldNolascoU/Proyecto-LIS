@@ -20,12 +20,12 @@
                                 {{ csrf_field() }}
                                 <div class="input-field col xl6 offset-xl3">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="Nombre" name="Nombre" type="text" class="validate">
+                                    <input id="Nombre" name="Nombre" type="text" class="validate" required>
                                     <label for="Nombre">Nombre</label>
                                 </div>
                                 <div class="input-field col xl6 offset-xl3">
                                     <i class="material-icons prefix">mail_outline</i>
-                                    <input id="Correo" name="Correo" type="text" class="validate">
+                                    <input id="Correo" name="Correo" type="email" class="validate" required>
                                     <label for="Correo">Correo</label>
                                 </div>
                                 <div class="input-field col xl6 offset-xl3">

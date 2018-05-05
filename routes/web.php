@@ -71,6 +71,10 @@ Route::get('/pdf/{id}','ConsultaController@pdf');
 
 Route::resource('User','UserController');
 
+Route::resource('TipoMascota','TipoMascotaController');
+
+Route::resource('TipoMedicamento','TipoMedicamentoController');
+
 //-----------------------------------------------------
 
 //Rutas AJAX

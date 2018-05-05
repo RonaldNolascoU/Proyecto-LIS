@@ -37,7 +37,7 @@ class ConsultaController extends Controller
             $users = User::all();
             $vets = [];
             foreach ($users as $user) {
-                if($user->hasRole('Veterinario')){
+                if($user->hasRole('Veterinario') && $user->estado == 1){
                     array_push($vets,$user);
                 }
             }
@@ -59,7 +59,7 @@ class ConsultaController extends Controller
         $users = User::all();
         $vets = [];
         foreach ($users as $user) {
-            if($user->hasRole('Veterinario')){
+            if($user->hasRole('Veterinario') && $user->estado == 1){
                 array_push($vets,$user);
             }
         }
@@ -197,7 +197,7 @@ class ConsultaController extends Controller
         $vet = [];
         foreach ($users as $user) {
             $cuenta = Consulta::where(['user_id'=>$user->id, 'Estado'=>2])->count();
-            if($cuenta == 0 AND $user->hasRole('Veterinario')){
+            if($cuenta == 0 && $user->hasRole('Veterinario') && $user->estado == 1){
                 array_push($vet,$user);
             }
         }

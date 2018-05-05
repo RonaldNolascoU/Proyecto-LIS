@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Illuminate\Database\QueryException;
+use App\Mail\SendPassword;
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Role;
 
@@ -54,11 +56,17 @@ class UserController extends Controller
             ]);
             $user->roles()->attach(Role::find($request->Tipo));
 
+            Mail::to($request->Correo)->send(new SendPassword($user));
+
             $success = "Usuario ingresado exitosamente";
             return redirect()->route('User.index')->with('success',$success);
 
         }catch(QueryException $ex){
             $prb = "Correo electronico ya implementado";
+            return redirect()->route('User.create')->with('prb',$prb);
+        }catch(\Exception $ex){
+            dd($ex);
+            $prb = "Problema enviando el correo, verifique que este bien escrito";
             return redirect()->route('User.create')->with('prb',$prb);
         }
     }

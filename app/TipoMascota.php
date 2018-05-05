@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoMascota extends Model
 {
-    protected $fillable = ['NombreTipo'];
+    protected $fillable = ['NombreTipo','Estado'];
 
     public function mascotas(){
         return $this->hasMany('Mascota');

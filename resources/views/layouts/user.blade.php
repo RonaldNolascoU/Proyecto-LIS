@@ -72,11 +72,11 @@
                 @endif
                  @if(Auth::user()->roles()->first()->Name == "Administrador")
                     <li>
-                        <a href="{{route('User.index')}}">
+                        <a href="{{route('TipoMedicamento.index')}}">
                             <i class="material-icons left">local_hospital</i>Tipos de medicamentos</a>
                     </li>
                     <li>
-                        <a href="{{route('User.index')}}">
+                        <a href="{{route('TipoMascota.index')}}">
                             <i class="material-icons left">pets</i>Tipos de mascotas</a>
                     </li>
                     <li>
