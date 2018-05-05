@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \Illuminate\Database\QueryException;
+use App\TipoMedicamento;
 
 class TipoMedicamentoController extends Controller
 {
@@ -13,7 +15,8 @@ class TipoMedicamentoController extends Controller
      */
     public function index()
     {
-        //
+        $tipos = TipoMedicamento::all();
+        return view('User.listaTipoMedicamento', compact('tipos'));
     }
 
     /**
@@ -23,7 +26,7 @@ class TipoMedicamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('User.createTipoMedicamento');
     }
 
     /**
@@ -34,7 +37,19 @@ class TipoMedicamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            TipoMedicamento::create([
+                'TipoMedicamento' => $request->Nombre,
+                'Estado'=> 1,
+            ]);
+
+            $success = "Tipo de medicamento ingresado exitosamente";
+            return redirect()->route('TipoMedicamento.index')->with('success',$success);
+
+        }catch(QueryException $ex){
+            $prb = "Nombre de tipo ya implementado";
+            return redirect()->route('TipoMedicamento.create')->with('prb',$prb);
+        }
     }
 
     /**
@@ -68,7 +83,19 @@ class TipoMedicamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $tipo = TipoMedicamento::find($id);
+
+            $tipo->update([
+                'Estado' => 2,
+            ]);
+
+            $success = "Tipo de medicamento eliminado exitosamente";
+            return redirect()->route('TipoMedicamento.index')->with('success',$success);
+        }catch(Exception $ex){
+            $prb = "Ocurrio un problema inesperado";
+            return redirect()->route('TipoMedicamento.index')->with('prb',$prb);
+        }
     }
 
     /**

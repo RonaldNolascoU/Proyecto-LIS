@@ -13,11 +13,11 @@
         <div class="col xl12">
             <div class="row">
                 <div class="col xl12">
-                    <h4 class="center-align teal-text">Lista de tipos de mascotas</h4>
+                    <h4 class="center-align teal-text">Lista de tipos de medicamentos</h4>
                 </div>
                 <div class="col xl12">
                     <div class="row">
-                        <a href="{{route('TipoMascota.create')}}" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Nuevo tipo de mascota</a>
+                        <a href="{{route('TipoMedicamento.create')}}" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Nuevo tipo de medicamento</a>
                     </div>
                 </div>
                 <div class="col xl12">
@@ -33,12 +33,12 @@
                                 @foreach($tipos as $tipo)
                                     @if($tipo->Estado == 1)
                                         <tr>
-                                            <td>{{$tipo->NombreTipo}}</td>
+                                            <td>{{$tipo->TipoMedicamento}}</td>
                                             <td>
                                                 <button class="btn waves-effect waves-light red" id="degradar" valid="{{$tipo->id}}" type="button" name="action">Eliminar
                                                     <i class="material-icons right">close</i>
                                                 </button>
-                                                <form id="{{$tipo->id}}" method="POST" action="{{ route('TipoMascota.update',$tipo->id) }}" role="form">
+                                                <form id="{{$tipo->id}}" method="POST" action="{{ route('TipoMedicamento.update',$tipo->id) }}" role="form">
                                                     {{ csrf_field() }}
                                                     <input name="_method" type="hidden" value="PATCH">
                                                 </form>
