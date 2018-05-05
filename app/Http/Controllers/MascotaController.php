@@ -152,4 +152,9 @@ class MascotaController extends Controller
             return redirect()->route('Mascota.show',$request->id)->with('prb',$prb);
         }
     }
+
+    public function listaConsultas(){
+        $cliente = Cliente::find(Session::get('id'));
+        return view('Mascota.consultas', compact('cliente'));
+    }
 }

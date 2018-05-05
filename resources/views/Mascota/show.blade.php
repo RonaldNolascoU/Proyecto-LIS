@@ -41,15 +41,11 @@
                     </div>
                     <div class="col xl11 offset-xl1">
                         <div class="row">
-                            <div class="col xl4 center-align">
+                            <div class="col xl6 center-align">
                                     <a id="btn-img" title="Ingresar caracteristica" href="#modal4" class="modal-trigger waves-effect waves-light btn teal">
                                         <i class="material-icons left">add_circle_outline</i>Ingresar caracteristica</a>
                             </div>
-                            <div class="col xl4 center-align">
-                                <a class="waves-effect waves-light btn blue" href="{{action('MascotaController@edit',$mascota->id)}}">
-                                    <i class="material-icons left">edit</i>Modificar</a>
-                            </div>
-                            <div class="col xl4 center-align">
+                            <div class="col xl6 center-align">
                                 <form id="eliminar" action="{{action('MascotaController@destroy',$mascota->id)}}" method="post">
                                     {{csrf_field()}}
                                     <input name="_method" type="hidden" value="DELETE">

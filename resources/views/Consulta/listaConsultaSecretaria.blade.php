@@ -19,6 +19,7 @@
                             <div class="col xl10 offset-xl1">
                                 <table id="entrantes" class="highlight centered">
                                 </table>
+                                <div class="holder controladorEntrantes"></div>
                             </div>
                         </div>
                     </div>
@@ -28,9 +29,9 @@
                                 <h4 class="center-align teal-text">Consultas por pagar</h4>
                             </div>
                             <div class="col xl10 offset-xl1">
-                                <table id="pago" class="highlight">
-                                    
+                                <table id="pago" class="highlight">    
                                 </table>
+                                <div class="holder controladorPago"></div>
                             </div>
                         </div>
                     </div>
@@ -145,7 +146,8 @@
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cerrar</a>
         </div>
     </div>
-    <script type="text/javascript" src="../../js/paginar.js"></script>
+    <link rel="stylesheet" href="../../css/jPages.css">
+    <script type="text/javascript" src="../../js/jpage.js"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -186,7 +188,7 @@
 
         function llenar(){
             $('.info').remove();
-            document.getElementById("entrantes").innerHTML = "<thead><tr><th>Mascota</th><th>Veterinario</th><th>Cambiar veterinario</th><th>Detalles</th><th>Eliminar</th><th>Pasar</th></tr></thead><tbody>";
+            document.getElementById("entrantes").innerHTML = "<thead><tr><th>Mascota</th><th>Veterinario</th><th>Cambiar veterinario</th><th>Detalles</th><th>Eliminar</th><th>Pasar</th></tr></thead><tbody id='EntrantesBody'>";
             $.ajax({
                 type: 'POST',
                 url: '/listaEntrantes',
@@ -197,22 +199,26 @@
                             mascota(valor.mascota_id);
                             veterinario(valor.user_id)
                         });
-                        document.getElementById("entrantes").innerHTML += "</tbody>"
+                        document.getElementById("entrantes").innerHTML += "</tbody>";
+                        paginarEntrantes()
                     }else{
                         $('#entrantes').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
-                        document.getElementById("entrantes").innerHTML += "</tbody>"
+                        document.getElementById("entrantes").innerHTML += "</tbody>";
+                        paginarEntrantes()
                     }
-                    $("#entrantes").paginationTdA({
-                        elemPerPage: 5
-                    });
                 },
                 error: function () {
                     $('#entrantes').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
-                    document.getElementById("entrantes").innerHTML += "</tbody>"
-                    $("#entrantes").paginationTdA({
-                        elemPerPage: 5
-                    });
+                    document.getElementById("entrantes").innerHTML += "</tbody>";
+                    paginarEntrantes();
                 }
+            });
+        }
+
+        function paginarEntrantes(){
+            $('.controladorEntrantes').jPages({
+                containerID: 'EntrantesBody',
+                perPage: 5
             });
         }
 
@@ -234,8 +240,9 @@
         }
 
         function pago(){
+            $('#pago').empty();
             $('.infoPago').remove();
-            var contenido = '<thead><tr><th>Dueño</th><th>Mascota</th><th>Veterinario</th><th>Detalles</th><th>Pagar</th></tr></thead><tbody>';
+            var contenido = '<thead><tr><th>Dueño</th><th>Mascota</th><th>Veterinario</th><th>Detalles</th><th>Pagar</th></tr></thead><tbody id="PagoBody">';  
             $.ajax({
                 type: 'POST',
                 url: '/listaPago',
@@ -247,25 +254,27 @@
                         });
                         contenido += '</tbody>';
                         $('#pago').append(contenido);
+                        paginarPago()
                     }else{
                         document.getElementById("pago").innerHTML = contenido;
                         $('#pago').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
-                        document.getElementById("pago").innerHTML += "</tbody>"
-                        $("#pago").paginationTdA({
-                            elemPerPage: 5
-                        });
+                        document.getElementById("pago").innerHTML += "</tbody>";
+                        paginarPago()
                     }
-                    $("#pago").paginationTdA({
-                        elemPerPage: 5
-                    });
+                    
                 },
                 error: function () {
                     $('#pago').append("<tr class='info'><td colspan='6' class='center-aling'>No hay registros</td></tr>");
-                    document.getElementById("entrantes").innerHTML += "</tbody>"
-                    $("#pago").paginationTdA({
-                        elemPerPage: 5
-                    });
+                    document.getElementById("entrantes").innerHTML += "</tbody>";
+                    paginarPago();
                 }
+            });
+        }
+
+        function paginarPago(){
+            $('.controladorPago').jPages({
+                containerID: 'PagoBody',
+                perPage: 1
             });
         }
 
@@ -275,7 +284,7 @@
                 url: '/costo',
                 data: {id: id},
                 success: function(costo){
-                    console.log(costo);
+                    $('#Costo').empty();
                     $('#Costo').append('<b>Total a cancelar:</b> $' + costo);
                     $('#consulta_costo').val(costo);
                 },
@@ -341,15 +350,17 @@
             
             $(document).on('click','#btnPagar',function(){
                 var id = $('#pago_id').val();
+                console.log(id)
                 $.ajax({
                     type: 'POST',
                     url: '/pagar',
                     data: {id:id},
                     success: function(respuesta){
-                        window.location.assign('/pdf/'+id);
+                        console.log(respuesta)
+                        /*window.location.assign('/pdf/'+id);
                         $('#modal9').modal('close');
                         llenar();
-                        pago();
+                        pago();*/
                     },
                     error: function(){
 

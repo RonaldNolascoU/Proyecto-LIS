@@ -207,6 +207,7 @@
                 url: '/conseguirConsulta',
                 data: { id: vet },
                 success: function (consulta) {
+                    console.log(consulta)
                     if(consulta != ""){
                         var actual = new Date();
                         var nac = new Date(consulta.FechaNacimiento);
@@ -323,7 +324,6 @@
             llenar();
             window.setInterval(verificar,1000);
             $(document).on('click','#recargar',function(){
-                console.log('si')
                 verificar();
             });
 

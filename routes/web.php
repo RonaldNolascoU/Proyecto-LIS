@@ -39,6 +39,8 @@ Route::resource('Caracteristica','CaracteristicaController');
 
 Route::post('Mascota/imagen','MascotaController@imagen')->middleware('login');
 
+Route::get('/listaConsultas', 'MascotaController@listaConsultas');
+
 //-----------------------------------------------------
 
 //Rutas de usuarios

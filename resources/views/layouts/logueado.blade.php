@@ -95,6 +95,14 @@
                 <div class="divider"></div>
             </li>
             <li>
+                <a href="/listaConsultas">
+                    <i class="material-icons">assignment</i>Consultas
+                </a>
+            </li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li>
                 <a href="../../cerrar">
                     <i class="material-icons">highlight_off</i>Cerrar Sesion
                 </a>

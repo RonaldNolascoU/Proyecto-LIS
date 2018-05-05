@@ -204,7 +204,7 @@ class ConsultaController extends Controller
 
     public function conseguirConsulta(Request $request){
         if(Auth::user()->id == $request->id){
-            $consulta = Consulta::where(['Estado'=>2,'user_id'=>$request->id])->join('mascotas','mascota_id','mascotas.id')->join('tipo_mascotas','mascotas.tipo_id','tipo_mascotas.id')->first();
+            $consulta = Consulta::where(['Estado'=>2,'user_id'=>$request->id])->join('mascotas','mascota_id','mascotas.id')->join('tipo_mascotas','mascotas.tipo_id','tipo_mascotas.id')->select('consultas.id','consultas.Peso','consultas.Altura','consultas.HoraLlegada','mascotas.NombreMascota','mascotas.imagen','mascotas.cliente_id','mascotas.FechaNacimiento','tipo_mascotas.NombreTipo')->first();
             return $consulta;
         }
 
@@ -225,7 +225,7 @@ class ConsultaController extends Controller
     }
 
     public function llenarPago(){
-        $consultas = Consulta::where(['Estado'=>3])->join('mascotas','consultas.mascota_id','=','mascotas.id')->join('clientes','mascotas.cliente_id','=','clientes.id')->get();
+        $consultas = Consulta::where(['Estado'=>3])->join('mascotas','consultas.mascota_id','=','mascotas.id')->join('clientes','mascotas.cliente_id','=','clientes.id')->select('consultas.id','clientes.PrimerNombre','clientes.PrimerApellido','mascotas.NombreMascota','consultas.user_id')->get();
         return $consultas;
     }
 
@@ -235,15 +235,20 @@ class ConsultaController extends Controller
     }
 
     public function pagar(Request $request){
+
         $costo = $this->calcularCosto($request->id);
+
         $consulta = Consulta::find($request->id);
+        
         Pago::create([
             'Monto'=>$costo,
             'consulta_id'=>$request->id,
         ]);
+
         $consulta->update([
-            'Estado'=>4
+            'Estado' => 4,
         ]);
+
         return 'OK';
     }
 
