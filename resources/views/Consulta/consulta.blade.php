@@ -177,7 +177,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat option">cancelar</a>
+            <a href="#!" id="cancelar" class="modal-close waves-effect waves-green btn-flat option">cancelar</a>
         </div>
     </div>
     <script type="text/javascript">
@@ -448,6 +448,9 @@
                         url: '../../Medicamento',
                         data: { id: id, tipo: tipo, nombre: nombre, medida: medida },
                         success: function (respuesta) {
+                            $('#Tipo').val("");
+                            $('#NombreMedicamento').val("");
+                            $('#Medida').val("");
                             $('#modal8').modal('close');
                             llenarDiagnostico();
                         },
@@ -514,6 +517,12 @@
                         }
                     })
                 }
+            })
+
+            $(document).on('click','#cancelar',function(){
+                $('#Tipo').val("");
+                $('#NombreMedicamento').val("");
+                $('#Medida').val("");            
             })
         });
     </script>

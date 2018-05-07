@@ -18,12 +18,12 @@
                 {{ csrf_field() }}
                  <div class="input-field col s12">
                         <i class="material-icons prefix">mail_outline</i>
-                        <input id="mail" name="mail" type="text" class="validate">
+                        <input id="mail" name="mail" type="email" class="validate" required>
                         <label for="mail">E-Mail</label>
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input id="clave" name="clave" type="password" class="validate">
+                        <input id="clave" name="clave" type="password" class="validate" required>
                         <label for="clave">Password</label>
                     </div>
                     <div class="col s4 offset-s4">

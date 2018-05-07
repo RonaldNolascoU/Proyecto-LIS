@@ -39,7 +39,7 @@
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->roles->first()->Name}}</td>
                                             <td>
-                                                @if($user->roles->first()->Name != 'Administrado')
+                                                @if($user->roles->first()->Name != 'Administrador')
                                                     @if($user->estado != 2)
                                                         <button class="btn waves-effect waves-light red" id="degradar" valid="{{$user->id}}" type="button" name="action">Degradar
                                                             <i class="material-icons right">file_download</i>

@@ -24,27 +24,27 @@
                 <div class="col xl12" id="login">
                     <div class="input-field col xl6 s12">
                         <i class="material-icons prefix">contacts</i>
-                        <input id="PrimerNombre" name="PrimerNombre" value="{{$cliente->PrimerNombre}}" type="text" class="validate">
+                        <input id="PrimerNombre" name="PrimerNombre" value="{{$cliente->PrimerNombre}}" type="text" class="validate" required>
                         <label for="PrimerNombre">Primer Nombre</label>
                     </div>
                     <div class="input-field col xl6 s12">
                         <i class="material-icons prefix">contacts</i>
-                        <input id="SegundoNombre" name="SegundoNombre" value="{{$cliente->SegundoNombre}}" type="text" class="validate">
+                        <input id="SegundoNombre" name="SegundoNombre" value="{{$cliente->SegundoNombre}}" type="text" class="validate" required>
                         <label for="SegundoNombre">Segundo Nombre</label>
                     </div>
                     <div class="input-field col xl6 s12">
                         <i class="material-icons prefix">contacts</i>
-                        <input id="PrimerApellido" name="PrimerApellido" value="{{$cliente->PrimerApellido}}" type="text" class="validate">
+                        <input id="PrimerApellido" name="PrimerApellido" value="{{$cliente->PrimerApellido}}" type="text" class="validate" required>
                         <label for="PrimerApellido">Primer Apellido</label>
                     </div>
                     <div class="input-field col xl6 s12">
                         <i class="material-icons prefix">contacts</i>
-                        <input id="SegundoApellido" name="SegundoApellido" value="{{$cliente->SegundoApellido}}" type="text" class="validate">
+                        <input id="SegundoApellido" name="SegundoApellido" value="{{$cliente->SegundoApellido}}" type="text" class="validate" required>
                         <label for="SegundoApellido">Segundo Apellido</label>
                     </div>
                     <div class="input-field col xl6 s12">
                         <i class="material-icons prefix">call</i>
-                        <input id="Telefono" name="Telefono" value="{{$cliente->telefono}}" type="text" class="validate">
+                        <input id="Telefono" name="Telefono" value="{{$cliente->telefono}}" type="text" class="validate" required>
                         <label for="Telefono">Telefono</label>
                     </div>
                     <div class="col xl4 offset-xl8 s5 offset-s3">

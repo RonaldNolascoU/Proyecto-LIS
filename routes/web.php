@@ -29,6 +29,8 @@ Route::post('Cliente/clave','ClienteController@clave')->middleware('login');
 
 Route::post('Cliente/imagen','ClienteController@imagen')->middleware('login');
 
+Route::post('/verificarClave', 'ClienteController@verificarClave')->middleware('login');
+
 //-----------------------------------------------------
 
 //Rutas de mantenimiento de mascotas

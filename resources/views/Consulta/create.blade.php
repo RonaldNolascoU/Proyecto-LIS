@@ -20,7 +20,7 @@
                                 {{ csrf_field() }}
                                 <div class="input-field col xl6 offset-xl3">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="Cliente" name="Cliente" type="text" class="validate">
+                                    <input id="Cliente" name="Cliente" type="text" class="validate" required>
                                     <label for="Cliente">Cliente - correo</label>
                                 </div>
                                 <div class="input-field col xl6 offset-xl3">
@@ -42,12 +42,12 @@
                                 </div>
                                 <div class="input-field col xl6 offset-xl3">
                                     <i class="material-icons prefix">fitness_center</i>
-                                    <input id="Peso" name="Peso" type="text" class="validate">
+                                    <input id="Peso" name="Peso" type="text" class="validate" required>
                                     <label for="Peso">Peso</label>
                                 </div>
                                 <div class="input-field col xl6 offset-xl3">
                                     <i class="material-icons prefix">vertical_align_top</i>
-                                    <input id="Altura" name="Altura" type="text" class="validate">
+                                    <input id="Altura" name="Altura" type="text" class="validate" required>
                                     <label for="Altura">Altura</label>
                                 </div>
                                 <div class="col xl4 offset-xl8 s5 offset-s3">

@@ -3,6 +3,7 @@
 @section('title','Perfil') 
 
 @section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection 
 
 @section('nombre', $cliente->PrimerNombre." ".$cliente->PrimerApellido)
@@ -56,16 +57,28 @@
         <div class="modal-content">
             <h4 class="teal-text">Cambiar clave</h4>
             <div class="container">
-                <form method="post" action="Cliente/clave">
+                <form id="confirmacion">
+                    <div class="input-field col xl12">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input id="Original" name="Original" type="password" class="validate" required>
+                        <label for="Original">Verifique su identidad, ingrese su password</label>
+                    </div>
+                    <div class="col xl12 center-align">
+                        <button class="btn waves-effect waves-light" id="btnVerificar" type="button" name="action">Verificar
+                            <i class="material-icons right">check</i>
+                        </button>
+                    </div>
+                </form>
+                <form id="cambio" method="post" action="Cliente/clave">
                     {{ csrf_field() }}
                     <div class="input-field col xl12">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input id="Clave" name="Clave" type="password" class="validate">
+                        <input id="Clave" name="Clave" type="password" class="validate" required>
                         <label for="Clave">Password</label>
                     </div>
                     <div class="input-field col xl12">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input id="Confirm" name="Confirm" type="password" class="validate">
+                        <input id="Confirm" name="Confirm" type="password" class="validate" required>
                         <label for="Confirm">Confirmacion</label>
                     </div>
                     <div class="col xl12 center-align">
@@ -77,7 +90,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>
+            <a href="#!" id="cancelar" class="modal-action modal-close waves-effect waves-green btn-flat option">Cancelar</a>
         </div>
     </div>
     <div id="modal2" class="modal">
@@ -116,4 +129,43 @@
     </div>
 
     <script type="text/javascript" src="../../js/imagen.js"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function(){
+            $('#confirmacion').show();
+            $('#cambio').hide();
+
+            $(document).on('click','#btnVerificar',function(){
+                var clave = $('#Original').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/verificarClave',
+                    data: {clave: clave},
+                    success: function(respuesta){
+                        if(respuesta == 'OK'){
+                            $('#confirmacion').hide();
+                            $('#cambio').show();
+                        }else{
+                            $('#Original').val("");
+                            $('#Original').focus();
+                            M.toast({html: "La clave no coincide"});
+                        }
+                    },
+                    error: function(){
+
+                    }
+                });
+            });
+
+            $(document).on('click','#cancelar',function(){
+                $('#confirmacion').show();
+                $('#cambio').hide();
+                $('#Original').val("");
+            });
+        })
+    </script>
 @endsection

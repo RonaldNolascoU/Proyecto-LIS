@@ -11,6 +11,14 @@
         <div class="col xl9">
             <div class="col xl12">
                 <div class="row">
+                    <div class="col xl3 offset-xl9">
+                        <div class="row">
+                            <br>
+                            <button class="btn waves-effect waves-light blue" id="recargar" type="button" name="action">Recargar
+                                <i class="material-icons right">autorenew</i>
+                            </button>
+                        </div>
+                    </div>
                     <div class="col xl12">
                         <div class="row">
                             <div class="col xl12">
@@ -299,6 +307,7 @@
             llenar();
             pago();
             window.setInterval(llenar, 50000);
+            window.setInterval(pago, 50000);
             window.setInterval(libres, 10000);
 
             $(document).on('click','#show', function(e){
@@ -356,17 +365,21 @@
                     url: '/pagar',
                     data: {id:id},
                     success: function(respuesta){
-                        console.log(respuesta)
-                        /*window.location.assign('/pdf/'+id);
+                        window.location.assign('/pdf/'+id);
                         $('#modal9').modal('close');
                         llenar();
-                        pago();*/
+                        pago();
                     },
                     error: function(){
 
                     }
                 })
             });
+
+            $(document).on('click','#recargar',function(){
+                llenar();
+                pago();
+            })
         });
     </script>
 @endsection

@@ -242,4 +242,14 @@ class ClienteController extends Controller
         $cliente = CLiente::where('correo',$request->correo)->first();
         return response()->json($cliente->mascotas);
     }
+
+    public function verificarClave(Request $request){
+        $id = Session::get('id');
+        $cliente = Cliente::find($id);
+        $pass = Crypt::decrypt($cliente->clave);
+        if($pass == $request->clave){
+            return 'OK';
+        }
+        return 'NO';
+    }
 }

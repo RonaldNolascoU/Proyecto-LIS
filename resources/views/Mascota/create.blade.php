@@ -24,17 +24,17 @@
                         <div class="col xl12" id="login">
                             <div class="input-field col xl6 s12">
                                 <i class="material-icons prefix">pets</i>
-                                <input id="Nombre" name="Nombre" type="text" class="validate">
+                                <input id="Nombre" name="Nombre" type="text" class="validate" required>
                                 <label for="Nombre">Nombre</label>
                             </div>
                             <div class="input-field col xl6 s12">
                                 <i class="material-icons prefix">av_timer</i>
-                                <input id="Fecha" name="Fecha" type="date" class="validate">
+                                <input id="Fecha" name="Fecha" type="date" max="2018-05-05" class="validate" required>
                                 <label for="Fecha">Fecha de nacimiento</label>
                             </div>
                             <div class="input-field col xl6 s12">
                                 <i class="material-icons prefix">details</i>
-                                <select name="Tipo" id="Tipo">
+                                <select name="Tipo" id="Tipo" required>
                                     <option value="" disabled selected>Choose your option</option>
                                     @foreach($tipos as $tipo)
                                         <option value="{{$tipo->id}}">{{$tipo->NombreTipo}}</option>
