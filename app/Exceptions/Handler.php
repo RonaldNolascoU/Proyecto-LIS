@@ -48,6 +48,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        $prb = "Necesita loguearse para acceder";
+        return redirect('/login')->with('prb',$prb);
+        //return parent::render($request, $exception);
     }
 }

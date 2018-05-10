@@ -334,11 +334,20 @@
                 });
             });
 
-            $(document).on('click','#delete', function(e){
-                var id = this.getAttribute('valid')
-                if(confirm('Seguro desea borrar esta consulta')){
-                    $('#'+id).submit();
-                }
+            $(document).on('click', '#delete', function (e) {
+                var id = this.getAttribute('valid');
+                swal({
+                    title: "Esta seguro?",
+                    text: "Se borrara esta consulta",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $('#' + id).submit();
+                        }
+                    });
             })
 
             $(document).on('click','#next',function(){

@@ -301,7 +301,7 @@
                 success: function (servicios) {
                     $('#listaServicios').append('<li class="collection-header teal-text"><h6 class="center-align">Servicios</h6></li>');
                     servicios.forEach(function(valor,indice){
-                        $('#listaServicios').append('<li class="c-item"><div class="valor-li"><span>'+ valor.DescripcionServicio +', costo: ' + valor.Precio + '</span></div><div valid="' + valor.id + '" class="btn-li eliminarServicio"><a class="btn-floating waves-effect waves-light red btn-small"><i class="material-icons tiny">remove</i></a></div></li>');
+                        $('#listaServicios').append('<li class="c-item"><div class="valor-li"><span>'+ valor.DescripcionServicio +', costo: $' + valor.Precio + '</span></div><div valid="' + valor.id + '" class="btn-li eliminarServicio"><a class="btn-floating waves-effect waves-light red btn-small"><i class="material-icons tiny">remove</i></a></div></li>');
                     });
                     $('#Servicio').val("");
                     $('#Precio').val("");
@@ -329,16 +329,27 @@
 
             $(document).on('click','#finalizar',function(){
                 var id = $('#id').val();
-                $.ajax({
-                    type: 'POST',
-                    url: '/finalizar',
-                    data: {id: id},
-                    success: function (respuesta) {
-                        $('#id').val("");
-                    },
-                    error: function(){
-                    }
+                swal({
+                    title: "Esta seguro?",
+                    text: "Se finalizara la consulta",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
                 })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/finalizar',
+                            data: {id: id},
+                            success: function (respuesta) {
+                                $('#id').val("");
+                            },
+                            error: function(){
+                            }
+                        })
+                    }
+                });
             });
 
             $(document).on('click','#ingresarSintoma',function(){
@@ -368,19 +379,28 @@
             $(document).on('click','.eliminarSintoma', function(){
                 var consulta_id = $('#id').val();
                 var id = this.getAttribute('valid');
-                if(confirm('Seguro desea eliminar este sintoma')){
-                    $.ajax({
-                        type: 'POST',
-                        url: '../../Sintoma/'+id,
-                        data: { _method: 'DELETE', consulta_id: consulta_id },
-                        success: function (sintomas) {
-                            llenarSintomas();
-                        },
-                        error: function () {
-                            
-                        }
-                    })
-                }
+                swal({
+                    title: "Esta seguro?",
+                    text: "Se eliminara el sintoma",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '../../Sintoma/'+id,
+                            data: { _method: 'DELETE', consulta_id: consulta_id },
+                            success: function (sintomas) {
+                                llenarSintomas();
+                            },
+                            error: function () {
+                                
+                            }
+                        })
+                    }
+                });
             })
             
             $(document).on('click','#ingresarDiagnostico',function(){
@@ -407,22 +427,31 @@
                 $('#Diagnostico').focus();
             })
             
-            $(document).on('click','.eliminarDiagnostico', function(){
+            $(document).on('click', '.eliminarDiagnostico', function () {
                 var consulta_id = $('#id').val();
                 var id = this.getAttribute('valid');
-                if(confirm('Seguro desea eliminar este diagnostico')){
-                    $.ajax({
-                        type: 'POST',
-                        url: '../../Diagnostico/'+id,
-                        data: { _method: 'DELETE', consulta_id: consulta_id },
-                        success: function (sintomas) {
-                            llenarDiagnostico();
-                        },
-                        error: function () {
-                            
+                swal({
+                    title: "Esta seguro?",
+                    text: "Se eliminara el diagnostico",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '../../Diagnostico/' + id,
+                                data: { _method: 'DELETE', consulta_id: consulta_id },
+                                success: function (sintomas) {
+                                    llenarDiagnostico();
+                                },
+                                error: function () {
+
+                                }
+                            })
                         }
-                    })
-                }
+                    });
             })
             
             $(document).on('click','#mostrarModal', function(){
@@ -463,19 +492,28 @@
             
             $(document).on('click','.eliminarMedicamento', function(){
                 var id = this.getAttribute('valid');
-                if(confirm('Seguro desea eliminar este medicamento')){
-                    $.ajax({
-                        type: 'POST',
-                        url: '../../Medicamento/'+id,
-                        data: { _method: 'DELETE' },
-                        success: function (respuesta) {
-                            llenarDiagnostico();
-                        },
-                        error: function () {
-                            
-                        }
-                    })
-                }
+                swal({
+                    title: "Esta seguro?",
+                    text: "Se eliminara el medicamento",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '../../Medicamento/'+id,
+                            data: { _method: 'DELETE' },
+                            success: function (respuesta) {
+                                llenarDiagnostico();
+                            },
+                            error: function () {
+                                
+                            }
+                        })
+                    }
+                });
             })
             
             $(document).on('click','#ingresarServicio',function(){
@@ -504,19 +542,29 @@
 
             $(document).on('click','.eliminarServicio', function(){
                 var id = this.getAttribute('valid');
-                if(confirm('Seguro desea eliminar este sintoma')){
-                    $.ajax({
-                        type: 'POST',
-                        url: '../../Servicio/'+id,
-                        data: { _method: 'DELETE' },
-                        success: function (respuesta) {
-                            llenarServicio();
-                        },
-                        error: function () {
-                            
-                        }
-                    })
-                }
+                swal({
+                    title: "Esta seguro?",
+                    text: "Se eliminara el servicio",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '../../Servicio/'+id,
+                            data: { _method: 'DELETE' },
+                            success: function (respuesta) {
+                                llenarServicio();
+                            },
+                            error: function () {
+                                
+                            }
+                        })
+                    }
+                });
+                
             })
 
             $(document).on('click','#cancelar',function(){

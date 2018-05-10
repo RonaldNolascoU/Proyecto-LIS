@@ -18,7 +18,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            $prb = "Necesita loguearse para acceder";
+            return redirect('/login')->with('prb',$prb);
         }
 
         return $next($request);

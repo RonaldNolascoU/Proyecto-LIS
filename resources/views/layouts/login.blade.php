@@ -8,28 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
     @yield('head')
 </head>
 
 <body>
     @if(Session::has('success'))
-        <style>
-            .toast{
-                background-color: #4db6ac;
-            }   
-        </style>
         <script type="text/javascript">
-            M.toast({html: "{{Session::get('success')}}"})
+            $(document).ready(function(){
+                swal("Completado","{{Session::get('success')}}","success");
+            });
         </script>
     @endif
     @if(Session::has('prb'))
-        <style>
-            .toast{
-                background-color: #d32f2f;
-            }   
-        </style>
         <script type="text/javascript">
-            M.toast({html: "{{Session::get('prb')}}"})
+            $(document).ready(function(){
+                swal("Error","{{Session::get('prb')}}","error");
+            });
         </script>
     @endif
     <nav>

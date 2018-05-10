@@ -11,8 +11,23 @@
         <script src="../../js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="../../js/materialize.min.js"></script>
         <script type="text/javascript" src="../../js/inicializacion.js"></script>
+        <script type="text/javascript" src="../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
     </head>
 <body>
+    @if(Session::has('success'))
+        <script type="text/javascript">
+            $(document).ready(function(){
+                swal("Completado","{{Session::get('success')}}","success");
+            });
+        </script>
+    @endif
+    @if(Session::has('prb'))
+        <script type="text/javascript">
+            $(document).ready(function(){
+                swal("Error","{{Session::get('prb')}}","error");
+            });
+        </script>
+    @endif
     <ul id="dropdown1" class="dropdown-content">
         <li></li>
         <li>

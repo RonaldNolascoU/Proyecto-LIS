@@ -17,7 +17,9 @@ class Estado
     public function handle($request, Closure $next)
     {
         if(Auth::user()->estado == 2){
-            abort(401, 'Ya no se le permite el acceso.');
+            Auth::logout();
+            $prb = "Ya no tiene permitido el acceso";
+            return redirect('/login')->with('prb',$prb);
         }
         return $next($request);
     }

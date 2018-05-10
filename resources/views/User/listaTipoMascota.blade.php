@@ -35,7 +35,7 @@
                                         <tr>
                                             <td>{{$tipo->NombreTipo}}</td>
                                             <td>
-                                                <button class="btn waves-effect waves-light red" id="degradar" valid="{{$tipo->id}}" type="button" name="action">Eliminar
+                                                <button class="btn waves-effect waves-light red" id="eliminar" valid="{{$tipo->id}}" type="button" name="action">Eliminar
                                                     <i class="material-icons right">close</i>
                                                 </button>
                                                 <form id="{{$tipo->id}}" method="POST" action="{{ route('TipoMascota.update',$tipo->id) }}" role="form">

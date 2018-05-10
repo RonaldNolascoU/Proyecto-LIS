@@ -2,7 +2,7 @@
 
 @section('title','Index') 
 @section('head')
-    <link rel="stylesheet" href="../css/index.css"> 
+    <link rel="stylesheet" href="../css/index.css">
 @endsection 
 @section('content')
 <div class="row">
