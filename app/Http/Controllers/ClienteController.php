@@ -42,46 +42,51 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         try{
-            /*$v = Validator::make($request->all(), [
-                'PrimerNombre' => 'required',
+            $this->validate($request, [
+                'PrimerNombre'=> 'required',
                 'PrimerApellido' => 'required',
                 'DUI' => 'required',
-                'Correo' => 'required',
+                'Correo' => 'required|email|unique:clientes,correo',
                 'Telefono' => 'required',
-                'clave' => 'required',
+                'Clave' => 'required',
             ]);
 
-            if($v->fails()){
-                return redirect()->back()->with('prb','No pasa');//Input()->withErrors($v->errors());
-            }*/
             if($request->hasFile('Imagen')){
                 $file = $request->file('Imagen');
                 $extension = $file->getClientOriginalExtension();
-                $file_name = $request->PrimerNombre.$request->PrimerApellido.$file->getClientOriginalName();
-                Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
-                $pass = Crypt::encrypt($request->Clave);
-                Cliente::create([
-                    'PrimerNombre' => $request->PrimerNombre,
-                    'SegundoNombre' => $request->SegundoNombre,
-                    'PrimerApellido' => $request->PrimerApellido,
-                    'SegundoApellido' => $request->SegundoApellido,
-                    'DUI' => $request->DUI,
-                    'Correo' => $request->Correo,
-                    'Telefono' => $request->Telefono,
-                    'clave' => ''.$pass.'',
-                    'Imagen' => $file_name,
-                ]);
-                $cliente = Cliente::where(['Correo'=>$request->Correo])->first();
-                Session::put('correo',$request->correo);
-                Session::put('id',$cliente->id);
-                $success = "Bienvenido";
-                return redirect('perfil')->with('success',$success);
+                if($extension == 'png' || $extension == 'PNG' || $extension == 'jpg' || $extension == 'JPG' || $extension == 'jpeg' || $extension == 'JPEG' ){
+                    $file_name = $request->PrimerNombre.$request->PrimerApellido.$file->getClientOriginalName();
+                    Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
+                    $pass = Crypt::encrypt($request->Clave);
+                    Cliente::create([
+                        'PrimerNombre' => $request->PrimerNombre,
+                        'SegundoNombre' => $request->SegundoNombre,
+                        'PrimerApellido' => $request->PrimerApellido,
+                        'SegundoApellido' => $request->SegundoApellido,
+                        'DUI' => $request->DUI,
+                        'Correo' => $request->Correo,
+                        'Telefono' => $request->Telefono,
+                        'clave' => ''.$pass.'',
+                        'Imagen' => $file_name,
+                    ]);
+
+                    $cliente = Cliente::where(['Correo'=>$request->Correo])->first();
+                    
+                    Session::put('correo',$request->correo);
+                    Session::put('id',$cliente->id);
+
+                    $success = "Bienvenido";
+                    return redirect('perfil')->with('success',$success);
+                }else{
+                    $prb = "La imagen es obligatoria";
+                    return redirect()->route('Cliente.create')->with('prb',$prb);
+                }
             }else{
                 $prb = "La imagen es obligatoria";
                 return redirect()->route('Cliente.create')->with('prb',$prb);
             }
         }catch(QueryException $ex){
-            $prb = "Correo electronico ya implementado en otra cuenta";
+            $prb = "Ocurrio un problema inesperado vuelva a intentarlo luego";
             return redirect()->route('Cliente.create')->with('prb',$prb);
         }
 
@@ -128,6 +133,12 @@ class ClienteController extends Controller
     {
         if(Session::has('id')){
             if(Session::get('id') == $id){
+                $this->validate($request, [
+                    'PrimerNombre'=> 'required',
+                    'PrimerApellido' => 'required',
+                    'Telefono' => 'required',
+                ]);
+
                 $cliente = Cliente::find($id);
                 $cliente->update([
                     'PrimerNombre' => $request->PrimerNombre,
@@ -138,6 +149,9 @@ class ClienteController extends Controller
                 ]);
                 $success = "Registro modificado correctamente";
                 return redirect('../../perfil')->with('success',$success);
+            }else{
+                $prb = "Inconcordancia con el cliente a modificar";
+                return redirect('../../perfil')->with('prb',$prb);
             }
         }else{
             $prb = "Necesita loguearse para acceder";
@@ -213,21 +227,27 @@ class ClienteController extends Controller
         try{
             if($request->hasFile('files')){
                 $cliente = Cliente::find(Session::get('id'));
-                if(\File::exists(public_path('img/Clientes/'.$cliente->imagen))){
-                    \File::delete(public_path('img/Clientes/'.$cliente->imagen));
-                    $file = $request->file('files');
-                    $file_name = $cliente->PrimerNombre.$cliente->PrimerApellido.$file->getClientOriginalName();
+                $file = $request->file('files');
+                $extension = $file->getClientOriginalExtension();
+                if($extension == 'png' || $extension == 'PNG' || $extension == 'jpg' || $extension == 'JPG' || $extension == 'jpeg' || $extension == 'JPEG' ){
+                    if(\File::exists(public_path('img/Clientes/'.$cliente->imagen))){
+                        \File::delete(public_path('img/Clientes/'.$cliente->imagen));
+                            $file_name = $cliente->PrimerNombre.$cliente->PrimerApellido.$file->getClientOriginalName();
 
-                    Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
-                    $cliente->update([
-                        'Imagen'=>$file_name,
-                    ]);
-                    $success = "Imagen de perfil cambiada correctamente";
-                    return redirect('../../perfil')->with('success',$success);
-                  }else{
-                    $prb = "Ocurrio un problema inesperado";
+                            Image::make($file)->resize(200,200)->save('img/Clientes/'.$file_name);
+                            $cliente->update([
+                                'Imagen'=>$file_name,
+                            ]);
+                            $success = "Imagen de perfil cambiada correctamente";
+                            return redirect('../../perfil')->with('success',$success);
+                    }else{
+                        $prb = "No se encontro la imagen antigua";
+                        return redirect('../../perfil')->with('prb',$prb);
+                    }
+                }else{
+                    $prb = "La imagen es obligatoria";
                     return redirect('../../perfil')->with('prb',$prb);
-                  }
+                }
             }else{
                 $prb = "No se encontro la imagen de actualizacion";
                 return redirect('../../perfil')->with('prb',$prb);    

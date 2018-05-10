@@ -80,9 +80,10 @@
                         <i class="material-icons prefix">lock_outline</i>
                         <input id="Confirm" name="Confirm" type="password" class="validate" required>
                         <label for="Confirm">Confirmacion</label>
+                        <span class="error Clave"></span>
                     </div>
                     <div class="col xl12 center-align">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Cambiar
+                        <button class="btn waves-effect waves-light" id="cambiarImagen" type="button" name="action">Cambiar
                             <i class="material-icons right">autorenew</i>
                         </button>
                     </div>
@@ -129,43 +130,5 @@
     </div>
 
     <script type="text/javascript" src="../../js/imagen.js"></script>
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $(document).ready(function(){
-            $('#confirmacion').show();
-            $('#cambio').hide();
-
-            $(document).on('click','#btnVerificar',function(){
-                var clave = $('#Original').val();
-                $.ajax({
-                    type: 'POST',
-                    url: '/verificarClave',
-                    data: {clave: clave},
-                    success: function(respuesta){
-                        if(respuesta == 'OK'){
-                            $('#confirmacion').hide();
-                            $('#cambio').show();
-                        }else{
-                            $('#Original').val("");
-                            $('#Original').focus();
-                            M.toast({html: "La clave no coincide"});
-                        }
-                    },
-                    error: function(){
-
-                    }
-                });
-            });
-
-            $(document).on('click','#cancelar',function(){
-                $('#confirmacion').show();
-                $('#cambio').hide();
-                $('#Original').val("");
-            });
-        })
-    </script>
+    <script type="text/javascript" src="../../js/validarPerfil.js"></script>
 @endsection
