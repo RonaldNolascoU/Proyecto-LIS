@@ -39,7 +39,9 @@ class MascotaController extends Controller
     {
         $tipos = TipoMascota::where(['Estado'=>1])->get();
         $cliente = Cliente::find(Session::get('id'));
-        return view('Mascota.create', compact('cliente','tipos'));
+        $now = new \DateTime();
+        $fechaMax = $now->format('Y-m-d');
+        return view('Mascota.create', compact('cliente','tipos','fechaMax'));
     }
 
     /**
@@ -51,19 +53,38 @@ class MascotaController extends Controller
     public function store(Request $request)
     {
         try{
+            $tipos = TipoMascota::where(['Estado'=>1])->get();
+            $tiposAdmitidos = "";
+
+            foreach ($tipos as $tipo) {
+                $tiposAdmitidos .= $tipo->id . ",";
+            }
+
+            $this->validate($request, [
+                'Nombre'=> 'required',
+                'Fecha' => 'required',
+                'Tipo' => 'required|in: '.$tiposAdmitidos,
+            ]);
+
             if($request->hasFile('Imagen')){
                 $file = $request->file('Imagen');
-                $file_name = Session::get('id').$file->getClientOriginalName();
-                Image::make($file)->resize(300,300)->save('img/Mascotas/'.$file_name);
-                Mascota::create([
-                    'NombreMascota' => $request->Nombre,
-                    'FechaNacimiento' => $request->Fecha,
-                    'Imagen' => $file_name,
-                    'tipo_id' => $request->Tipo,
-                    'cliente_id' => Session::get('id'),
-                ]);
-                $success = "Mascota ingresada correctamente";
-                return redirect()->route('Mascota.index')->with('success',$success);
+                $extension = $file->getClientOriginalExtension();
+                if($extension == 'png' || $extension == 'PNG' || $extension == 'jpg' || $extension == 'JPG' || $extension == 'jpeg' || $extension == 'JPEG' ){
+                    $file_name = Session::get('id').$file->getClientOriginalName();
+                    Image::make($file)->resize(300,300)->save('img/Mascotas/'.$file_name);
+                    Mascota::create([
+                        'NombreMascota' => $request->Nombre,
+                        'FechaNacimiento' => $request->Fecha,
+                        'Imagen' => $file_name,
+                        'tipo_id' => $request->Tipo,
+                        'cliente_id' => Session::get('id'),
+                    ]);
+                    $success = "Mascota ingresada correctamente";
+                    return redirect()->route('Mascota.index')->with('success',$success);
+                }else{
+                    $prb = "La imagen es obligatoria";
+                    return redirect()->route('Mascota.create')->with('prb',$prb);
+                }
             }else{
                 $prb = "La imagen es obligatoria";
                 return redirect()->route('Mascota.create')->with('prb',$prb);

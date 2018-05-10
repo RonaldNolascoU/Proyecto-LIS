@@ -27,12 +27,12 @@
                     </div>
                     <div class="input-field col xl6 s12">
                         <i class="material-icons prefix">contacts</i>
-                        <input id="SegundoNombre" name="SegundoNombre" type="text" class="validate" >
+                        <input id="SegundoNombre" name="SegundoNombre" type="text" class="validate" required>
                         <label for="SegundoNombre">Segundo Nombre</label>
                     </div>
                     <div class="input-field col xl6 s12 input-validado">
                         <i class="material-icons prefix">contacts</i>
-                        <input id="PrimerApellido" name="PrimerApellido" type="text" class="validate" >
+                        <input id="PrimerApellido" name="PrimerApellido" type="text" class="validate" required>
                         <label for="PrimerApellido">Primer Apellido</label>
                         <span class="error PrimerApellido"></span>
                     </div>
@@ -43,36 +43,36 @@
                     </div>
                     <div class="input-field col xl6 s12 input-validado">
                         <i class="material-icons prefix">credit_card</i>
-                        <input id="DUI" name="DUI" type="text" class="validate" >
+                        <input id="DUI" name="DUI" type="text" class="validate" required>
                         <label for="DUI">DUI</label>
                         <span class="error DUI"></span>
                     </div>
                     <div class="input-field col xl6 s12 input-validado">
                         <i class="material-icons prefix">call</i>
-                        <input id="Telefono" name="Telefono" type="text" class="validate" >
+                        <input id="Telefono" name="Telefono" type="text" class="validate" required>
                         <label for="Telefono">Telefono</label>
                         <span class="error Telefono"></span>
                     </div>
                     <div class="input-field col xl12 input-validado">
                         <i class="material-icons prefix">mail_outline</i>
-                        <input id="Correo" name="Correo" type="email" class="validate" >
+                        <input id="Correo" name="Correo" type="email" class="validate" required>
                         <label for="Correo">Correo</label>
                         <span class="error Correo"></span>
                     </div>
                     <div class="input-field col xl12">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input id="Clave" name="Clave" type="password" class="validate" >
+                        <input id="Clave" name="Clave" type="password" class="validate" required >
                         <label for="Clave">Password</label>
                     </div>
                     <div class="input-field col xl12 input-validado">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input id="Confirmar" name="Confirmar" type="password" class="validate" >
+                        <input id="Confirmar" name="Confirmar" type="password" class="validate" required>
                         <label for="Confirmar">Confirmar password</label>
                         <span class="error Clave"></span>
                     </div>
                     <div class="input-field col xl12 input-validado">
                         <i class="material-icons prefix">camera_alt</i>
-                        <input id="Imagen" name="Imagen" type="file" accept="image/png, .jpeg, .jpg" class="validate" >
+                        <input id="Imagen" name="Imagen" type="file" accept="image/png, .jpeg, .jpg" class="validate" required>
                         <span class="Imagen"></span>
                     </div>
                     <div class="col xl5 offset-xl7 s5 offset-s3">
@@ -84,7 +84,7 @@
                         @if ($errors->any())
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                    <li class="red">{{ $error }}</li>
+                                    <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         @endif

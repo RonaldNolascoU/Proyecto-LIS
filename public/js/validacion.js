@@ -53,8 +53,6 @@ function validarDUI(cadena, nombre){
 
 function validarCorreo(cadena, nombre){
     var patron = new RegExp("[a-zA-Z._0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+");
-   console.log(resp = patron.test(cadena))
-   
     if(patron.test(cadena)){
         $("."+nombre).text('');
         $("#"+nombre).removeClass("invalid");
@@ -78,6 +76,29 @@ function validarConfirmacion(){
         $(".Clave").text('La clave y la confirmacion no concuerdan');
         $("#Confirmar").removeClass("valid");
         $("#Confirmar").addClass("invalid");
+        return false;
+    }
+}
+
+function validarNombre(cadena,nombre){
+    cadena = cadena.trim();
+    if(cadena != ""){
+        var patron = new RegExp('[0-9+=?/,<>{}]+');
+        if(patron.test(cadena)){
+            $("."+nombre).text('Solo deben ser letras');
+            $("#"+nombre).removeClass("valid");
+            $("#"+nombre).addClass("invalid");
+            return false;
+        }else{
+            $("."+nombre).text('');
+            $("#"+nombre).removeClass("invalid");
+            $("#"+nombre).addClass("valid");
+            return true;
+        }
+    }else{
+        $("."+nombre).text('No puede estar vacio');
+        $("#"+nombre).removeClass("valid");
+        $("#"+nombre).addClass("invalid");
         return false;
     }
 }

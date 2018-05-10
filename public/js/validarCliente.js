@@ -55,6 +55,7 @@ $(document).ready(function () {
         var valor = $('#Imagen').val();
         var patron = new RegExp('.[jpg|JPG|png|PNG|jpeg|JPEG]$');
         if (patron.test(valor)) {
+            $('.Imagen').text("");
             img = true;
         } else {
             $('.Imagen').text('Solo se aceptan imagenes')

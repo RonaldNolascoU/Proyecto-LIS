@@ -75,3 +75,7 @@ input[type=button] {
     margin-bottom: 0;
     color: red;
 }
+
+.input-validado{
+    max-height: 54px; 
+}
