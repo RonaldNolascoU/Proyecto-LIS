@@ -1,13 +1,14 @@
 @extends('layouts.app')
-
+@section('title','Login')
 @section('content')
-<div class="container">
+<div class="container" id="home">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="col xl12 center-align">
+                    <h5 class="teal-text center-align">Login</h5>
+                    <img src="../../img/User_Circle.png" alt="">
+                </div>
 
-                <div class="panel-body">
+                <div class="col xl12">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 

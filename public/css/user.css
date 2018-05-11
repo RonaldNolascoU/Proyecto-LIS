@@ -66,3 +66,12 @@ body{
     margin-bottom: 0;
     color: red;
 }
+
+#home{
+    background-color: #eceff1;
+    padding: 2%;
+}
+
+#action{
+    margin-top: 2%;
+}

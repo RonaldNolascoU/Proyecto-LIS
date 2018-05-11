@@ -23,7 +23,7 @@
                                 <div class="card-image">
                                     <img src="img/Mascotas/{{$mascota->imagen}}">
                                     <a href="{{route('Mascota.show',$mascota->id)}}" class="btn-floating btn-large halfway-fab waves-effect waves-light blue">
-                                        <i class="material-icons">add</i>
+                                        <i class="material-icons">info_outline</i>
                                     </a>
                                 </div>
                                 <div class="card-content">

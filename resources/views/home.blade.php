@@ -1,13 +1,15 @@
 @extends('layouts.app')
-
+@section('title','Inicio')
 @section('content')
-<div class="container">
+<div class="container" id="home">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Bienvenido</div>
+                <div class="col xl12">
+                    <h5 class="teal-text center-align">Bienvenido</h5>
+                </div>
 
-                <div class="panel-body">
+                <div class="col xl12">
                     <center>
                         <img src="img/animal-prints.png" alt="StarPets"><br>
                         <b>StarPets</b>

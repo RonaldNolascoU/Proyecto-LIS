@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <title>Login</title>
+        <title>@yield('title')</title>
         <meta charset="utf-8">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css" media="screen,projection" />
@@ -87,11 +87,9 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
+    <div class="container" id="action">
         <div class="row">
-            <div class="col xl12 card horizontal" >
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
     </div>
 </body>
