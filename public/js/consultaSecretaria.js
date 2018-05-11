@@ -165,11 +165,12 @@ $(document).ready(function () {
     $(document).on('click', '#edit', function (e) {
         var id = this.getAttribute('valid')
         $.get("Consulta/" + id + "/edit", function (c) {
-            console.log(c)
+            $('#CambiarVeterinarioID').val(id);
             document.getElementById("EditNombre").innerHTML = "<b>Nombre de la mascota: </b>" + c.mascota[0].NombreMascota;
             document.getElementById("EditFecha").innerHTML = "<b>Fecha y hora: </b>" + c.consulta[0].FechaConsulta + ", " + c.consulta[0].HoraLlegada;
             document.getElementById("EditPeso").innerHTML = "<b>Peso de la mascota: </b>" + c.consulta[0].Peso;
             document.getElementById("EditAltura").innerHTML = "<b>Altura de la mascota: </b>" + c.consulta[0].Altura;
+            document.getElementById("EditVeterinario").innerHTML = "<b>Nombre del veterinario actual: </b>" + c.veterinario[0].name;
             $('#Veterianrio').find('option[value="' + c.veterinario[0].id + '"]').prop('selected', true);
             $('#Veterianrio').formSelect();
         });
@@ -209,7 +210,6 @@ $(document).ready(function () {
 
     $(document).on('click', '#btnPagar', function () {
         var id = $('#pago_id').val();
-        console.log(id)
         $.ajax({
             type: 'POST',
             url: '/pagar',
@@ -229,5 +229,27 @@ $(document).ready(function () {
     $(document).on('click', '#recargar', function () {
         llenar();
         pago();
+    })
+
+    $(document).on('click','#btnCambiar',function(){
+        var veterinario = $('#Veterinario').val();
+        var consulta = $('#CambiarVeterinarioID').val();
+        $.ajax({
+            type: 'POST',
+            url: '/Consulta/veterinario',
+            data: { id: consulta, user: veterinario },
+            success: function (respuesta) {
+                if(respuesta == 'OK'){
+                    swal("Completado con exito", "Consulta cambiada a otro veterinario", "success");
+                    llenar();
+                    $('#modal7').modal('close');
+                }else{
+                    swal("Error", "Ocurrio un problema vuelva a intentarlo", "error");
+                }
+            },
+            error: function () {
+
+            }
+        })
     })
 });

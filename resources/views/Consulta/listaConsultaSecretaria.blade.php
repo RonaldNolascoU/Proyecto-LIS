@@ -82,15 +82,18 @@
         <div class="modal-content">
             <h4 class="teal-text">Cambiar veterinario</h4>
             <div class="container">
-                <form method="post" id="frmImagen" action="Cliente/imagen" enctype="multipart/form-data">
+                <form method="post" id="frmVeterinario" action="/Consulta/veterinario" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
-                        <input type="hidden" name="id" value="">
+                        <input type="hidden" name="id" id="CambiarVeterinarioID" value="">
                         <div class="col xl12">
                             <span id="EditNombre"></span>
                         </div>
                         <div class="col xl12">
                             <span id="EditFecha"></span>
+                        </div>
+                        <div class="col xl12">
+                            <span id="EditVeterinario"></span>
                         </div>
                         <div class="col xl6">
                             <span id="EditPeso"></span>
@@ -109,10 +112,13 @@
                             <label>Veterinario</label>
                         </div>
                         <div class="col xl12 center-align">
-                            <button type="submit" id="btnCambiar" class="btn waves-effect waves-light white-text" name="action">
+                            <button type="button" id="btnCambiar" class="btn waves-effect waves-light white-text" name="action">
                                 Cambiar
                                 <i class="material-icons right">autorenew</i>
                             </button>
+                        </div>
+                        <div class="col xl12">
+                            <span>*En caso que cambie el veterinario su turno pasara a ser el ultimo en la otra fila</span>
                         </div>
                     </div>
                 </form>

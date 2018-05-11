@@ -57,6 +57,8 @@ Route::resource('Consulta','ConsultaController');
 
 Route::post('/pasar','ConsultaController@pasar');
 
+Route::post('/Consulta/veterinario','ConsultaController@cambiarVeterinario');
+
 Route::resource('Sintoma','SintomaController');
 
 Route::resource('Diagnostico','DiagnosticoController');

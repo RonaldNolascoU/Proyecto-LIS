@@ -165,7 +165,7 @@ class ConsultaController extends Controller
     }
 
     public function llenarEntrantes(){
-        $consultasIngresadas = Consulta::where('Estado',1)->get();
+        $consultasIngresadas = Consulta::where('Estado',1)->orderBy('HoraLlegada','desc')->get();
         return $consultasIngresadas;
     }
 
@@ -266,6 +266,25 @@ class ConsultaController extends Controller
         $pdf = PDF::loadView('Consulta.pdf', compact('consulta'));
         $nombre = 'Factura_consulta'.$id.'.pdf';
         return $pdf->download($nombre);
+    }
+
+    public function cambiarVeterinario(Request $request){
+        try{
+            if($request->id != "" && $request->user != ""){
+                $consulta = Consulta::find($request->id);
+                $dia = date('Y-m-d');
+                $hora = date('H:i:s');
+                $consulta->update([
+                    'FechaConsulta' => $dia,
+                    'HoraLlegada' => $hora,
+                    'user_id' => $request->user
+                ]);
+                return 'OK';
+            }
+            return 'NO';
+        }catch(QueryException $ex){
+            return 'NO';
+        } 
     }
 
     //Funciones privadas
