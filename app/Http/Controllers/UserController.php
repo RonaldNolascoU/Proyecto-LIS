@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Illuminate\Database\QueryException;
 use App\Mail\SendPassword;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Role;
@@ -22,6 +23,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        Auth::user()->authorizeRoles('Administrador');
         $users = User::all();
         return view('User.index',compact('users'));
     }
@@ -33,6 +35,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        Auth::user()->authorizeRoles('Administrador');
         $roles = Role::All();
         return view('User.create', compact('roles'));
     }
@@ -45,7 +48,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Auth::user()->authorizeRoles('Administrador');
         try{
+            $this->validate($request,[
+                'Nombre' => 'required',
+                'Correo' => 'required|email|unique:users,email',
+                'Tipo' => 'required',
+            ]);
 
             $password = str_random(8);
             $user = User::create([
@@ -62,11 +71,7 @@ class UserController extends Controller
             return redirect()->route('User.index')->with('success',$success);
 
         }catch(QueryException $ex){
-            $prb = "Correo electronico ya implementado";
-            return redirect()->route('User.create')->with('prb',$prb);
-        }catch(\Exception $ex){
-            dd($ex);
-            $prb = "Problema enviando el correo, verifique que este bien escrito";
+            $prb = "Ocurrio un problema inesperado";
             return redirect()->route('User.create')->with('prb',$prb);
         }
     }
@@ -102,6 +107,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Auth::user()->authorizeRoles('Administrador');
         try{
             $user = User::find($id);
 

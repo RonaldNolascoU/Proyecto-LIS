@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 use App\TipoMedicamento;
 
 class TipoMedicamentoController extends Controller
@@ -15,6 +16,7 @@ class TipoMedicamentoController extends Controller
      */
     public function index()
     {
+        Auth::user()->authorizeRoles('Administrador');
         $tipos = TipoMedicamento::all();
         return view('User.listaTipoMedicamento', compact('tipos'));
     }
@@ -26,6 +28,7 @@ class TipoMedicamentoController extends Controller
      */
     public function create()
     {
+        Auth::user()->authorizeRoles('Administrador');
         return view('User.createTipoMedicamento');
     }
 
@@ -37,7 +40,12 @@ class TipoMedicamentoController extends Controller
      */
     public function store(Request $request)
     {
+        Auth::user()->authorizeRoles('Administrador');
         try{
+            $this->validate($request,[
+                'Nombre'=>'required|unique:tipo_medicamentos,TipoMedicamento'
+            ]);
+
             TipoMedicamento::create([
                 'TipoMedicamento' => $request->Nombre,
                 'Estado'=> 1,
@@ -47,7 +55,7 @@ class TipoMedicamentoController extends Controller
             return redirect()->route('TipoMedicamento.index')->with('success',$success);
 
         }catch(QueryException $ex){
-            $prb = "Nombre de tipo ya implementado";
+            $prb = "Ocurrio un problema inesperado";
             return redirect()->route('TipoMedicamento.create')->with('prb',$prb);
         }
     }
@@ -83,6 +91,7 @@ class TipoMedicamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Auth::user()->authorizeRoles('Administrador');
         try{
             $tipo = TipoMedicamento::find($id);
 
