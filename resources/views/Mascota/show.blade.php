@@ -89,7 +89,7 @@
     <div class="modal-content">
         <h4 class="teal-text">Agregar caracteristica</h4>
         <div class="container">
-            <form method="post" id="frmImagen" action="{{route('Caracteristica.store')}}">
+            <form method="post" id="frmCaracteristica" action="{{route('Caracteristica.store')}}">
                 {{ csrf_field() }}
                 <div class="row">
                     <input type="hidden" name="id" value="{{$mascota->id}}">
@@ -97,9 +97,10 @@
                         <i class="material-icons prefix">add_circle_outline</i>
                         <input id="Caracteristica" name="Caracteristica" type="text" class="validate">
                         <label for="Caracteristica">Caracteristica</label>
+                        <span class="error Caracteristica"></span>
                     </div>
                     <div class="col xl12 center-align">
-                        <button type="submit" id="btnAgregar" class="btn waves-effect waves-light white-text" name="action">
+                        <button type="button" id="btnAgregar" class="btn waves-effect waves-light white-text" name="action">
                             Agregar
                             <i class="material-icons right">add</i>
                         </button>
@@ -156,4 +157,6 @@
 </div>
 <script type="text/javascript" src="../../js/confirmacion.js"></script>
 <script type="text/javascript" src="../../js/imagen.js"></script>
+<script type="text/javascript" src="../../js/validacion.js"></script>
+<script type="text/javascript" src="../../js/validarCaracteristica.js"></script>
 @endsection

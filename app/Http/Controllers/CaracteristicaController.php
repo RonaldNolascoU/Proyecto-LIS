@@ -40,12 +40,18 @@ class CaracteristicaController extends Controller
     public function store(Request $request)
     {
         try{
-            Caracteristica::create([
-                'DescripcionCaracteristica' => $request->Caracteristica,
-                'mascota_id' => $request->id,
-            ]);
-            $success = "Caracteristica ingresada correctamente";
-            return redirect()->route('Mascota.show',$request->id)->with('success',$success);   
+            $caracteristica = $request->Caracteristica;
+            if(trim($caracteristica) != ""){
+                Caracteristica::create([
+                    'DescripcionCaracteristica' => $request->Caracteristica,
+                    'mascota_id' => $request->id,
+                ]);
+                $success = "Caracteristica ingresada correctamente";
+                return redirect()->route('Mascota.show',$request->id)->with('success',$success);  
+            }else{
+                $prb = "No se encontro informacion a ingresar";
+                return redirect()->route('Mascota.show',$request->id)->with('prb',$prb);
+            }
         }catch(QueryException $ex){
             $prb = "Ocurrio un problema inesperado, intentelo nuevamente";
             return redirect()->route('Mascota.show',$request->id)->with('prb',$prb);

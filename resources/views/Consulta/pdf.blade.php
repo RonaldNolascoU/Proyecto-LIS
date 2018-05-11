@@ -31,8 +31,8 @@
                 <td>Tipo de mascota: {{$consulta->mascota->tipo->NombreTipo}}</td>
             </tr>
             <tr>
-                <td>Altura: {{$consulta->Altura}}</td>
-                <td>Peso: {{$consulta->Peso}}</td>
+                <td>Altura: {{$consulta->Altura}} lb</td>
+                <td>Peso: {{$consulta->Peso}} cm</td>
             </tr>
             <tr>
                 <td colspan="2"><h3>Diagnosticos</h3></td>

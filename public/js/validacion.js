@@ -102,3 +102,17 @@ function validarNombre(cadena,nombre){
         return false;
     }
 }
+
+function validar(cadena,nombre){
+    if(cadena != ""){
+        $("."+nombre).text('');
+        $("#"+nombre).removeClass("invalid");
+        $("#"+nombre).addClass("valid");
+        return true;
+    }else{
+        $("."+nombre).text('No puede estar vacio');
+        $("#"+nombre).removeClass("valid");
+        $("#"+nombre).addClass("invalid");
+        return false;
+    }
+}

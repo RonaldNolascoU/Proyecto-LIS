@@ -42,8 +42,8 @@
             <a href="#!" class="brand-logo">StarPets</a>
             <ul class="right hide-on-med-and-down">
                     @guest
-                        <li><a href="/">Login de clientes</a></li>
-                        <li><a href="{{route('login')}}">Login de usuarios</a></li>
+                        <li><a href="/"><i class="material-icons left">perm_identity</i>Login de clientes</a></li>
+                        <li><a href="{{route('login')}}"><i class="material-icons left">business_center</i>Login de usuarios</a></li>
                     @else 
                         @if(Auth::user()->roles()->first()->Name == "Veterinario")
                             <li>

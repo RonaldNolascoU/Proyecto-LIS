@@ -152,21 +152,27 @@ class MascotaController extends Controller
     public function imagen(Request $request){
         try{
             if($request->hasFile('files')){
-                $mascota = Mascota::find($request->id);
-                if(\File::exists(public_path('img/Mascotas/'.$mascota->imagen))){
-                    \File::delete(public_path('img/Mascotas/'.$mascota->imagen));
-                    $file = $request->file('files');
-                    $file_name = Session::get('id').$file->getClientOriginalName();
-                    Image::make($file)->resize(300,300)->save('img/Mascotas/'.$file_name);
-                    $mascota->update([
-                        'Imagen'=>$file_name,
-                    ]);
-                    $success = "Imagen de mascota cambiada correctamente";
-                    return redirect()->route('Mascota.show',$request->id)->with('success',$success);
-                  }else{
-                    $prb = "Ocurrio un problema inesperado";
+                $file = $request->file('files');
+                $extension = $file->getClientOriginalExtension();
+                if($extension == 'png' || $extension == 'PNG' || $extension == 'jpg' || $extension == 'JPG' || $extension == 'jpeg' || $extension == 'JPEG' ){
+                    $mascota = Mascota::find($request->id);
+                    if(\File::exists(public_path('img/Mascotas/'.$mascota->imagen))){
+                        \File::delete(public_path('img/Mascotas/'.$mascota->imagen));
+                        $file_name = Session::get('id').$file->getClientOriginalName();
+                        Image::make($file)->resize(300,300)->save('img/Mascotas/'.$file_name);
+                        $mascota->update([
+                            'Imagen'=>$file_name,
+                        ]);
+                        $success = "Imagen de mascota cambiada correctamente";
+                        return redirect()->route('Mascota.show',$request->id)->with('success',$success);
+                    }else{
+                        $prb = "Ocurrio un problema inesperado";
+                        return redirect()->route('Mascota.show',$request->id)->with('prb',$prb);
+                    }
+                }else{
+                    $prb = "La imagen es obligatoria";
                     return redirect()->route('Mascota.show',$request->id)->with('prb',$prb);
-                  }
+                }
             }else{
                 $prb = "No se encontro la imagen de actualizacion";
                 return redirect()->route('Mascota.show',$request->id)->with('prb',$prb);    

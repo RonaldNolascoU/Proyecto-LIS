@@ -76,6 +76,13 @@ class ConsultaController extends Controller
     {
         Auth::user()->authorizeRoles('Secretaria');
         try{
+            $this->validate($request ,[
+                'Peso' => 'required',
+                'Altura' => 'required',
+                'Mascota' => 'required',
+                'Veterinario' => 'required',
+            ]);
+            
             $cuenta = Consulta::where(['mascota_id'=>$request->Mascota, 'Estado'=>1])->count();
             if($cuenta == 0){
                 $dia = date('Y-m-d');

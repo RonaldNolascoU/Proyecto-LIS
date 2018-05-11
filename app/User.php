@@ -36,7 +36,8 @@ class User extends Authenticatable
         if ($this->hasAnyRole($roles)) {
             return true;
         }
-        abort(401, 'Esta acción no está autorizada.');
+        $prb = "No tiene permisos para acceder";
+        return redirect('/home')->with('prb', $prb);
     }
     
     public function hasAnyRole($roles)

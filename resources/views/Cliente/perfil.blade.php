@@ -16,37 +16,41 @@
     <div class="row" id="cont">
         <div class="col xl10 offset-xl2">
             <div class="row">
-                <div class="col xl12 center-align">
+                <!-- Inicio de modificación -->
+                <div class="col s12 center-align">
+                    <!-- Foto de perfil -->
                     <br>
                     <img src="../img/Clientes/{{$cliente->imagen}}" alt="Imagen de perfil" class="circle">
                     <a id="btn-img" title="Cambiar imagen" href="#modal2" class="modal-trigger btn-floating btn-large">
                         <i class="material-icons">cached</i>
                     </a>
                 </div>
-                <div class="col xl12 center-align">
-                    <h2 class="principal">{{$cliente->PrimerNombre}} {{$cliente->SegundoNombre}} {{$cliente->PrimerApellido}} {{$cliente->SegundoApellido}}
-
-                        <hr>
-                    </h2>
+                <div class="col s12 center-align">
+                    <!-- Nombre de perfil -->
+                    <h2 class="principal">{{$cliente->PrimerNombre}} {{$cliente->SegundoNombre}} {{$cliente->PrimerApellido}} {{$cliente->SegundoApellido}}</h2>
+                    <hr>
                     <br>
-                    <a class="modal-trigger black-text option" href="#modal1"><i class="material-icons">enhanced_encryption</i> Cambiar clave</a>
+                    <a class="modal-trigger black-text option" href="#modal1">
+                        <i class="material-icons">enhanced_encryption</i> Cambiar clave</a>
                 </div>
                 <div class="col xl10 offset-xl2">
-                    <div class="col xl6">
+                    <!-- Datos de perfil -->
+                    <div class="col s12">
                         <h5>
                             <strong>Telefono: </strong>{{$cliente->telefono}}</h5>
                     </div>
-                    <div class="col xl6">
+                    <div class="col s12">
                         <h5>
                             <strong>Correo: </strong>{{$cliente->correo}}</h5>
                     </div>
                     <br>
-                    <div class="col xl6">
+                    <div class="col s12">
                         <h5>
                             <strong>DUI: </strong>{{$cliente->DUI}}</h5>
                     </div>
                 </div>
                 <div class="col xl12 center-align">
+                    <br>
                     <a class="waves-effect waves-light btn" href="{{action('ClienteController@edit',$cliente->id)}}">
                         <i class="material-icons left">edit</i>Modificar</a>
                 </div>
