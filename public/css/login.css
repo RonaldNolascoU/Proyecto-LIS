@@ -44,6 +44,10 @@ hr{
     margin-left: -8%;
 }
 
+#btnCambiarImagen{
+    margin-top: -5%;
+}
+
 input[type=file].hidden {
     color: transparent;
   }

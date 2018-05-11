@@ -13,39 +13,32 @@
 
 @section('content')
 <div class="row" id="cont">
-    <div class="col xl10 offset-xl2">
+    <div class="col xl9 offset-xl3">
         <div class="row">
             <div class="col xl12">
                 <div class="row">
-                    <div class="col xl12 center-align">
-                        <h2>{{$mascota->NombreMascota}}</h2>
-                    </div>
-                    <div class="col xl12 center-align">
+                    <!-- Inicio de modificación -->
+                    <div class="col xl4 center-align">
                         <br>
                         <img src="../img/Mascotas/{{$mascota->imagen}}" alt="Imagen de perfil" class="circle">
-                        <a id="btn-img" title="Cambiar imagen" href="#modal5" class="modal-trigger blue btn-floating btn-large">
+                        <!-- Imagen -->
+                        <a id="btnCambiarImagen" title="Cambiar imagen" href="#modal5" class="modal-trigger blue btn-floating btn-large">
                             <i class="material-icons">cached</i>
                         </a>
                     </div>
-                    <div class="col xl10 offset-xl2">
+                    <div class="col s8 left-align">
+                        <h2>{{$mascota->NombreMascota}}</h2>
                         <div class="row">
-                            <div class="col xl6">
+                            <div class="col s12">
                                 <h5>
                                     <strong>Fecha de nacimiento: </strong>{{$mascota->FechaNacimiento}}</h5>
                             </div>
-                            <div class="col xl6">
+                            <div class="col s12">
                                 <h5>
                                     <strong>Tipo: </strong>{{$mascota->tipo->NombreTipo}}</h5>
+                                <br>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col xl11 offset-xl1">
-                        <div class="row">
-                            <div class="col xl6 center-align">
-                                    <a id="btn-img" title="Ingresar caracteristica" href="#modal4" class="modal-trigger waves-effect waves-light btn teal">
-                                        <i class="material-icons left">add_circle_outline</i>Ingresar caracteristica</a>
-                            </div>
-                            <div class="col xl6 center-align">
+                            <div class="col s12 left-align">
                                 <form id="eliminar" action="{{action('MascotaController@destroy',$mascota->id)}}" method="post">
                                     {{csrf_field()}}
                                     <input name="_method" type="hidden" value="DELETE">
@@ -58,23 +51,36 @@
                     </div>
                     <div class="col xl11 offset-xl1">
                         <div class="row">
+
+                        </div>
+                    </div>
+                    <div class="col xl11 offset-xl1">
+                        <div class="row">
                             <div class="col xl10 offset-xl1">
                                 <ul class="collection with-header">
+                                    <br>
+                                    <div class="col s12 left-align offset-s1">
+                                        <a id="btn-img" title="Ingresar caracteristica" href="#modal4" class="modal-trigger waves-effect waves-light btn teal">
+                                            <i class="material-icons left">add_circle_outline</i>Ingresar caracteristica</a>
+                                    </div>
+                                    <br>
                                     <li class="collection-header">
                                         <h4>Caracteristicas</h4>
                                     </li>
                                     @foreach($mascota->caracteristicas as $caracteristica)
-                                        <li class="collection-item">
-                                            <div>{{$caracteristica->DescripcionCaracteristica}}
-                                                <form id="EC-{{$caracteristica->id}}" class="secondary-content btn-min" action="{{route('Caracteristica.destroy',$caracteristica->id)}}" method="post">
-                                                    {{csrf_field()}}
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                    <button class="btn-floating waves-effect waves-light red btn-small" type="button" onclick="eliminarCaracteristica('{{$caracteristica->id}}')" name="action">
-                                                        <i class="material-icons">delete</i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </li>
+                                    <li class="collection-item">
+                                        <div>{{$caracteristica->DescripcionCaracteristica}}
+                                            <form id="EC-{{$caracteristica->id}}" class="secondary-content btn-min" action="{{route('Caracteristica.destroy',$caracteristica->id)}}"
+                                                method="post">
+                                                {{csrf_field()}}
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button class="btn-floating waves-effect waves-light red btn-small" type="button" onclick="eliminarCaracteristica('{{$caracteristica->id}}')"
+                                                    name="action">
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -84,7 +90,6 @@
             </div>
         </div>
     </div>
-</div>
 <div id="modal4" class="modal">
     <div class="modal-content">
         <h4 class="teal-text">Agregar caracteristica</h4>
