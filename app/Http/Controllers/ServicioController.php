@@ -41,12 +41,17 @@ class ServicioController extends Controller
     public function store(Request $request)
     {
         try{
-            Servicio::create([
-                'DescripcionServicio' => $request->servicio,
-                'Precio' => $request->precio,
-                'consulta_id' => $request->id,
-            ]);
-            return 'OK';
+            $servicio = $request->servicio;
+            if(trim($servicio) != ""){
+                Servicio::create([
+                    'DescripcionServicio' => $request->servicio,
+                    'Precio' => $request->precio,
+                    'consulta_id' => $request->id,
+                ]);
+                return 'OK';
+            }else{
+                return 'NO';
+            }
         }catch(QueryException $ex){
             return 'NO';
         }

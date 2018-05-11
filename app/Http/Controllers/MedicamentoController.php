@@ -41,13 +41,19 @@ class MedicamentoController extends Controller
     public function store(Request $request)
     {
         try{
-            Medicamento::create([
-                'NombreMedicamento' => $request->nombre,
-                'Medida' => $request->medida,
-                'diagnostico_id' => $request->id,
-                'tipo_medicamento_id' => $request->tipo,
-            ]);
-            return 'OK';
+            $nombre = $request->nombre;
+            $medida = $request->medida;
+            if(trim($nombre) != "" && trim($medida)!=""){
+                Medicamento::create([
+                    'NombreMedicamento' => $request->nombre,
+                    'Medida' => $request->medida,
+                    'diagnostico_id' => $request->id,
+                    'tipo_medicamento_id' => $request->tipo,
+                ]);
+                return 'OK';
+            }else{
+                return 'NO';
+            }
         }catch(QueryException $ex){
             return 'NO';
         }

@@ -41,14 +41,19 @@ class SintomaController extends Controller
     public function store(Request $request)
     {
         try{
-            Sintoma::create([
-                'DescripcionSintoma' => $request->sintoma,
-                'consulta_id' => $request->id,
-            ]);
-            $sintomas = Sintoma::where(['consulta_id'=>$request->id])->get();
-            return $sintomas;
+            $sintoma = $request->sintoma;
+            if(trim($sintoma) != ""){
+                Sintoma::create([
+                    'DescripcionSintoma' => $request->sintoma,
+                    'consulta_id' => $request->id,
+                ]);
+                $sintomas = Sintoma::where(['consulta_id'=>$request->id])->get();
+                return 'OK';
+            }else{
+                return 'NO';
+            }
         }catch(QueryException $ex){
-            return 'Problema';
+            return 'NO';
         }
     }
 

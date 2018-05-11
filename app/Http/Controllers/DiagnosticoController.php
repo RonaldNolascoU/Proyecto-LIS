@@ -42,11 +42,16 @@ class DiagnosticoController extends Controller
     public function store(Request $request)
     {
         try{
-            Diagnostico::create([
-                'DescripcionDiagnostico' => $request->diagnostico,
-                'consulta_id' => $request->id,
-            ]);
-            return 'OK';
+            $diagnostico = $request->diagnostico;
+            if(trim($diagnostico) != ""){
+                Diagnostico::create([
+                    'DescripcionDiagnostico' => $request->diagnostico,
+                    'consulta_id' => $request->id,
+                ]);
+                return 'OK';
+            }else{
+                return 'NO';
+            }
         }catch(QueryException $ex){
             return 'NO';
         }
